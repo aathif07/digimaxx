@@ -1,6 +1,6 @@
 import { HeroSection } from "@/components/hero-section"
 import { DashboardPreview } from "@/components/dashboard-preview"
-import { SocialProof } from "@/components/social-proof"
+import { DemoOne } from "@/demo"
 import { BentoSection } from "@/components/bento-section"
 import { LargeTestimonial } from "@/components/large-testimonial"
 import { PricingSection } from "@/components/pricing-section"
@@ -17,14 +17,14 @@ export default function LandingPage() {
         <main className="relative">
           <HeroSection />
           {/* Dashboard Preview Wrapper */}
-          <div className="absolute bottom-[-150px] md:bottom-[-400px] left-1/2 transform -translate-x-1/2 z-30">
+          <div className="absolute bottom-[-100px] md:bottom-[-250px] left-1/2 transform -translate-x-1/2 z-30">
             <AnimatedSection>
               <DashboardPreview />
             </AnimatedSection>
           </div>
         </main>
-        <AnimatedSection className="relative z-10 px-6 mt-[411px] md:mt-[400px]" delay={0.1}>
-          <SocialProof />
+        <AnimatedSection className="relative z-10 px-6 mt-[300px] md:mt-[280px]" delay={0.1}>
+          <DemoOne />
         </AnimatedSection>
         <AnimatedSection id="features-section" className="relative z-10 mt-16" delay={0.2}>
           <BentoSection />
