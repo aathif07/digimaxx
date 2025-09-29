@@ -21,6 +21,9 @@ import {
   TrendingUp,
 } from "lucide-react"
 import { motion, useScroll, useTransform, useInView, useSpring } from "framer-motion"
+import { FeatureSteps } from "@/components/blocks/feature-section"
+import { GlowingEffect } from "@/components/ui/glowing-effect"
+import { cn } from "@/lib/utils"
 
 export default function AboutUsSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -60,7 +63,7 @@ export default function AboutUsSection() {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: "easeOut" },
+      transition: { duration: 0.6 },
     },
   }
 
@@ -115,11 +118,25 @@ export default function AboutUsSection() {
     },
   ]
 
-  const stats = [
-    { icon: <Award />, value: 150, label: "Projects Completed", suffix: "+" },
-    { icon: <Users />, value: 1200, label: "Happy Clients", suffix: "+" },
-    { icon: <Calendar />, value: 12, label: "Years Experience", suffix: "" },
-    { icon: <TrendingUp />, value: 98, label: "Satisfaction Rate", suffix: "%" },
+  const features = [
+    { 
+      step: 'Step 1', 
+      title: 'Our Mission',
+      content: 'To deliver data-driven, AI-powered marketing solutions that maximize ROI while keeping creativity at the core.', 
+      image: 'https://images.unsplash.com/photo-1723958929247-ef054b525153?q=80&w=2070&auto=format&fit=crop' 
+    },
+    { 
+      step: 'Step 2',
+      title: 'Our Vision',
+      content: 'To become the world\'s most trusted AI-driven marketing partner for businesses of all sizes.',
+      image: 'https://images.unsplash.com/photo-1723931464622-b7df7c71e380?q=80&w=2070&auto=format&fit=crop'
+    },
+    { 
+      step: 'Step 3',
+      title: 'Our Values',
+      content: 'Innovation • Transparency • Results • Collaboration • Adaptability',
+      image: 'https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop'
+    },
   ]
 
   return (
@@ -184,159 +201,35 @@ export default function AboutUsSection() {
           We help brands cut through the noise with strategies that are smarter, faster, and more efficient.
         </motion.p>
 
-        {/* Mission, Vision, Values in Single Box */}
-        <div className="max-w-4xl mx-auto mb-16">
-          <div className="bg-gradient-to-br from-red-900/30 via-black/50 to-red-800/20 border border-red-500/30 rounded-2xl p-8 backdrop-blur-sm">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-red-500 font-bold text-lg">M</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-red-400">Our Mission</h3>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  To deliver data-driven, AI-powered marketing solutions that maximize ROI while keeping creativity at the core.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-red-500 font-bold text-lg">V</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-red-400">Our Vision</h3>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  To become the world's most trusted AI-driven marketing partner for businesses of all sizes.
-                </p>
-              </div>
-              <div className="text-center">
-                <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <span className="text-red-500 font-bold text-lg">V</span>
-                </div>
-                <h3 className="text-xl font-semibold mb-4 text-red-400">Our Values</h3>
-                <p className="text-white/80 text-sm leading-relaxed">
-                  Innovation • Transparency • Results • Collaboration • Adaptability
-                </p>
-              </div>
-            </div>
-          </div>
+        {/* FeatureSteps Component */}
+        <div className="max-w-6xl mx-auto mb-16">
+          <FeatureSteps 
+            features={features}
+            title="Our Foundation"
+            autoPlayInterval={4000}
+            imageHeight="h-[500px]"
+            className="p-0"
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-          {/* Left Column */}
-          <div className="space-y-16">
-            {services
-              .filter((service) => service.position === "left")
-              .map((service, index) => (
-                <ServiceItem
-                  key={`left-${index}`}
-                  icon={service.icon}
-                  secondaryIcon={service.secondaryIcon}
-                  title={service.title}
-                  description={service.description}
-                  variants={itemVariants}
-                  delay={index * 0.2}
-                  direction="left"
-                />
-              ))}
+        {/* Services Grid with Glowing Cards */}
+        <div className="max-w-6xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-semibold text-white mb-4">Our Services</h2>
+            <p className="text-white/70 text-lg max-w-2xl mx-auto">
+              Comprehensive digital marketing solutions designed to accelerate your growth
+            </p>
           </div>
-
-          {/* Center Image */}
-          <div className="flex justify-center items-center order-first md:order-none mb-8 md:mb-0">
-            <motion.div className="relative w-full max-w-xs" variants={itemVariants}>
-              <motion.div
-                className="rounded-md overflow-hidden shadow-xl"
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                transition={{ duration: 0.8, delay: 0.3 }}
-                whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
-              >
-                <img
-                  src="https://images.unsplash.com/photo-1747582411588-f9b4acabe995?q=80&w=3027&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                  alt="Modern House"
-                  className="w-full h-full object-cover"
-                />
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-t from-[#202e44]/50 to-transparent flex items-end justify-center p-4"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.8, delay: 0.9 }}
-                >
-                  <motion.button
-                    className="bg-white text-[#202e44] px-4 py-2 rounded-full flex items-center gap-2 text-sm font-medium"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                
-                  </motion.button>
-                </motion.div>
-              </motion.div>
-              <motion.div
-                className="absolute inset-0 border-4 border-[#A9BBC8] rounded-md -m-3 z-[-1]"
-                initial={{ opacity: 0, scale: 1.1 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-              ></motion.div>
-
-              {/* Floating accent elements */}
-              <motion.div
-                className="absolute -top-4 -right-8 w-16 h-16 rounded-full bg-red-500/10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 0.9 }}
-                style={{ y: y1 }}
-              ></motion.div>
-              <motion.div
-                className="absolute -bottom-6 -left-10 w-20 h-20 rounded-full bg-[#A9BBC8]/15"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 1, delay: 1.1 }}
-                style={{ y: y2 }}
-              ></motion.div>
-
-              {/* Additional decorative elements */}
-              <motion.div
-                className="absolute -top-10 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-red-500"
-                animate={{
-                  y: [0, -10, 0],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              ></motion.div>
-              <motion.div
-                className="absolute -bottom-12 left-1/2 -translate-x-1/2 w-2 h-2 rounded-full bg-[#A9BBC8]"
-                animate={{
-                  y: [0, 10, 0],
-                  opacity: [0.5, 1, 0.5],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                  delay: 0.5,
-                }}
-              ></motion.div>
-            </motion.div>
-          </div>
-
-          {/* Right Column */}
-          <div className="space-y-16">
-            {services
-              .filter((service) => service.position === "right")
-              .map((service, index) => (
-                <ServiceItem
-                  key={`right-${index}`}
-                  icon={service.icon}
-                  secondaryIcon={service.secondaryIcon}
-                  title={service.title}
-                  description={service.description}
-                  variants={itemVariants}
-                  delay={index * 0.2}
-                  direction="right"
-                />
-              ))}
-          </div>
+          <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {services.map((service, index) => (
+              <ServiceCard
+                key={index}
+                icon={service.icon}
+                title={service.title}
+                description={service.description}
+              />
+            ))}
+          </ul>
         </div>
       </motion.div>
     </section>
@@ -401,6 +294,44 @@ function ServiceItem({ icon, secondaryIcon, title, description, variants, delay,
     </motion.div>
   )
 }
+
+interface ServiceCardProps {
+  icon: React.ReactNode;
+  title: string;
+  description: string;
+}
+
+const ServiceCard = ({ icon, title, description }: ServiceCardProps) => {
+  return (
+    <li className="min-h-[14rem] list-none">
+      <div className="relative h-full rounded-[1.25rem] border-[0.75px] border-red-500/30 p-2 md:rounded-[1.5rem] md:p-3">
+        <GlowingEffect
+          spread={40}
+          glow={true}
+          disabled={false}
+          proximity={64}
+          inactiveZone={0.01}
+          borderWidth={3}
+        />
+        <div className="relative flex h-full flex-col justify-between gap-6 overflow-hidden rounded-xl border-[0.75px] bg-gradient-to-br from-zinc-800/90 via-zinc-900/95 to-black/90 p-6 shadow-sm hover:shadow-red-500/20 hover:shadow-lg transition-all duration-300 md:p-6">
+          <div className="relative flex flex-1 flex-col justify-between gap-3">
+            <div className="w-fit rounded-lg border-[0.75px] border-red-500/30 bg-red-500/10 p-2 text-red-500">
+              {icon}
+            </div>
+            <div className="space-y-3">
+              <h3 className="pt-0.5 text-xl leading-[1.375rem] font-semibold font-sans tracking-[-0.04em] md:text-2xl md:leading-[1.875rem] text-balance text-white">
+                {title}
+              </h3>
+              <h2 className="[&_b]:md:font-semibold [&_strong]:md:font-semibold font-sans text-sm leading-[1.125rem] md:text-base md:leading-[1.375rem] text-white/70">
+                {description}
+              </h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </li>
+  );
+};
 
 interface StatCounterProps {
   icon: React.ReactNode

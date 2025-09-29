@@ -6,34 +6,34 @@ import { ChevronDown } from "lucide-react"
 
 const faqData = [
   {
-    question: "What is Pointer and who is it for?",
+    question: "What is DigiMaxx and who is it for?",
     answer:
-      "Pointer is an AI-powered development platform designed for developers, teams, and organizations who want toaccelerate their coding workflow. It's perfect for both individual developers looking to enhance their productivity and teams seeking seamless collaboration tools.",
+      "DigiMaxx is a next-generation digital marketing agency designed for businesses, entrepreneurs, and organizations who want to achieve accelerated growth. We're perfect for both startups looking to establish their digital presence and established companies seeking to dominate their market through innovative AI-driven strategies.",
   },
   {
-    question: "How does Pointer's AI code review work?",
+    question: "How does DigiMaxx's AI-driven marketing work?",
     answer:
-      "Our AI analyzes your code in real-time, providing intelligent suggestions for improvements, catching potential bugs, and ensuring best practices. It learns from your coding patterns and adapts to your team's standards, making code reviews faster and more consistent.",
+      "Our AI analyzes market trends, consumer behavior, and your competition in real-time, providing intelligent strategies for maximum impact. We use advanced algorithms to optimize your campaigns, predict market shifts, and ensure your brand stays ahead of the competition with data-driven decision making.",
   },
   {
-    question: "Can I integrate Pointer with my existing tools?",
+    question: "What digital marketing services does DigiMaxx offer?",
     answer:
-      "Yes! Pointer offers one-click integrations with popular development tools including GitHub, GitLab, VS Code, Slack, and many more. Our MCP connectivity allows you to easily manage and configure server access across your entire development stack.",
+      "We offer comprehensive digital marketing solutions including SEO optimization, content marketing, social media management, market research & analytics, targeted advertising campaigns, and marketing automation. Our integrated approach ensures all channels work together for maximum growth.",
   },
   {
-    question: "What's included in the free plan?",
+    question: "How quickly can I see results with DigiMaxx?",
     answer:
-      "The free plan includes real-time code suggestions, basic integrations, single MCP server connection, up to 2 AI coding agents, and Vercel deployments with Pointer branding. It's perfect for individual developers getting started.",
+      "While digital marketing is a long-term strategy, many clients see initial improvements within 30-60 days. Our AI-driven approach accelerates traditional timelines - you'll see increased engagement within weeks, improved search rankings within 2-3 months, and significant ROI growth within 3-6 months.",
   },
   {
-    question: "How do parallel coding agents work?",
+    question: "Do you work with businesses of all sizes?",
     answer:
-      "Our parallel coding agents can work on different parts of your codebase simultaneously, solving complex problems faster than traditional single-threaded approaches. You can launch multiple agents to handle different tasks like bug fixes, feature development, and code optimization concurrently.",
+      "Absolutely! We work with startups, small businesses, mid-market companies, and enterprise organizations. Our strategies are scalable and customized to fit your budget, goals, and industry. Whether you're just starting out or looking to scale exponentially, we have solutions for every growth stage.",
   },
   {
-    question: "Is my code secure with Pointer?",
+    question: "How do you measure success and ROI?",
     answer:
-      "Absolutely. We use enterprise-grade security measures including end-to-end encryption, secure data transmission, and compliance with industry standards. Your code never leaves your secure environment without your explicit permission, and we offer on-premises deployment options for enterprise customers.",
+      "We provide comprehensive analytics and reporting that track key performance indicators including website traffic, conversion rates, lead generation, brand awareness, and revenue growth. Our transparent reporting shows exactly how your investment translates into measurable business results and accelerated growth.",
   },
 ]
 
@@ -99,11 +99,11 @@ export function FAQSection() {
             Frequently Asked Questions
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm font-medium leading-[18.20px] break-words">
-            Everything you need to know about Pointer and how it can transform your development workflow
+            Everything you need to know about DigiMaxx and how we can accelerate your business growth
           </p>
         </div>
       </div>
-      <div className="w-full max-w-[600px] pt-0.5 pb-10 flex flex-col justify-start items-start gap-4 relative z-10">
+      <div className="w-full max-w-[1000px] pt-0.5 pb-10 flex flex-col justify-start items-start gap-4 relative z-10">
         {faqData.map((faq, index) => (
           <FAQItem key={index} {...faq} isOpen={openItems.has(index)} onToggle={() => toggleItem(index)} />
         ))}

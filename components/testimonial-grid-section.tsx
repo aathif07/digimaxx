@@ -1,129 +1,132 @@
 import Image from "next/image"
+import { Quote, Star } from "lucide-react"
+import { GlowingEffect } from "@/components/ui/glowing-effect"
 
 const testimonials = [
   {
     quote:
-      "The real-time code suggestions from Pointer feel like having a senior engineer reviewing every line of code as you write. The accuracy of its recommendations has improved our overall code quality, reduced review time.",
-    name: "Annette Black",
-    company: "Sony",
-    avatar: "/images/avatars/annette-black.png",
+      "DigiMaxx has exceeded our expectations in every way. The ease with which we can target specific audience segments has transformed our approach to digital marketing. The automation features have saved us countless hours, allowing us to focus on strategy.",
+    name: "Sarah Johnson",
+    company: "TechFlow Solutions",
+    avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
     type: "large-teal",
   },
   {
     quote:
-      "Integrating Pointer into our stack was smooth, and the MCP server connections saved us days of configuration work",
-    name: "Dianne Russell",
-    company: "McDonald's",
-    avatar: "/images/avatars/dianne-russell.png",
+      "I can't imagine managing our digital campaigns without DigiMaxx. The AI-driven strategies have been a game-changer for our marketing team. Our organic traffic has grown by 300%.",
+    name: "Michael Chen",
+    company: "GrowthLab",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     type: "small-dark",
   },
   {
     quote:
-      "Pointer’s multi-agent coding feature has been a game changer. We’re fixing complex bugs in hours instead of spending entire sprints on them.",
-    name: "Cameron Williamson",
-    company: "IBM",
-    avatar: "/images/avatars/cameron-williamson.png",
+      "DigiMaxx's SEO optimization delivered faster ranking improvements and smarter keyword targeting. Our organic visibility increased dramatically within just 3 months.",
+    name: "Emma Rodriguez",
+    company: "Digital Dynamics",
+    avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
     type: "small-dark",
   },
   {
     quote:
-      "We no longer juggle multiple tools. Pointer brought all our integrations together in one place, which simplified our entire workflow.",
-    name: "Robert Fox",
-    company: "MasterCard",
-    avatar: "/images/avatars/robert-fox.png",
+      "The AI content creation at scale is incredible. From blog posts to social media campaigns, everything is tailored perfectly to our audience with consistent publishing.",
+    name: "David Park",
+    company: "ContentCorp",
+    avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
     type: "small-dark",
   },
   {
     quote:
-      "We started with the free plan just to test it out, but within a week we upgraded to Pro. Now, we can’t imagine coding without it",
-    name: "Darlene Robertson",
-    company: "Ferrari",
-    avatar: "/images/avatars/darlene-robertson.png",
+      "Our paid advertising ROI has maximized with DigiMaxx's AI-driven bidding and targeting. Lower ad spend waste, higher conversions - exactly what we needed.",
+    name: "Lisa Thompson",
+    company: "AdVantage Media",
+    avatar: "https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?w=150&h=150&fit=crop&crop=face",
     type: "small-dark",
   },
   {
     quote:
-      "Collaborative coding feels effortless now. With Pointer’s real-time previews, pair programming has become faster and more productive.",
-    name: "Cody Fisher",
-    company: "Apple",
-    avatar: "/images/avatars/cody-fisher.png",
+      "Social media automation has given us consistency across platforms with stronger engagement and wider brand reach. The trend detection is phenomenal.",
+    name: "James Wilson",
+    company: "SocialSphere",
+    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
     type: "small-dark",
   },
   {
     quote:
-      "Deploying on Vercel with Pointer was not just simple, it felt seamless. We went from coding to seeing our changes live in minutes without worrying about build pipelines or configuration issues.",
-    name: "Albert Flores",
-    company: "Louis Vuitton",
-    avatar: "/images/avatars/albert-flores.png",
+      "The email and CRM automation with hyper-personalized flows has increased our open rates by 250% and significantly reduced churn. Customer behavior prediction is spot-on.",
+    name: "Rachel Adams",
+    company: "EmailMax Pro",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&h=150&fit=crop&crop=face",
     type: "large-light",
   },
 ]
 
-const TestimonialCard = ({ quote, name, company, avatar, type }) => {
-  const isLargeCard = type.startsWith("large")
-  const avatarSize = isLargeCard ? 48 : 36
-  const avatarBorderRadius = isLargeCard ? "rounded-[41px]" : "rounded-[30.75px]"
-  const padding = isLargeCard ? "p-6" : "p-[30px]"
+interface TestimonialCardProps {
+  quote: string;
+  type: string;
+}
 
-  let cardClasses = `flex flex-col justify-between items-start overflow-hidden rounded-[10px] shadow-[0px_2px_4px_rgba(0,0,0,0.08)] relative ${padding}`
+const TestimonialCard = ({ quote, type }: TestimonialCardProps) => {
+  const isLargeCard = type.startsWith("large")
+  const padding = isLargeCard ? "p-6" : "p-6"
+
+  let cardClasses = `group flex flex-col justify-start items-start overflow-hidden rounded-xl shadow-sm relative ${padding} transition-all duration-300 hover:scale-[1.02] hover:shadow-lg cursor-pointer animate-fade-in`
   let quoteClasses = ""
-  let nameClasses = ""
-  let companyClasses = ""
-  let backgroundElements = null
   let cardHeight = ""
   const cardWidth = "w-full md:w-[384px]"
 
   if (type === "large-teal") {
-    cardClasses += " bg-primary"
-    quoteClasses += " text-primary-foreground text-2xl font-medium leading-8"
-    nameClasses += " text-primary-foreground text-base font-normal leading-6"
-    companyClasses += " text-primary-foreground/60 text-base font-normal leading-6"
+    cardClasses += " bg-slate-800 text-white"
+    quoteClasses += " text-white text-2xl font-medium leading-8"
     cardHeight = "h-[502px]"
-    backgroundElements = (
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: "url('/images/large-card-background.svg')", zIndex: 0 }}
-      />
-    )
   } else if (type === "large-light") {
-    cardClasses += " bg-[rgba(231,236,235,0.12)]"
-    quoteClasses += " text-foreground text-2xl font-medium leading-8"
-    nameClasses += " text-foreground text-base font-normal leading-6"
-    companyClasses += " text-muted-foreground text-base font-normal leading-6"
+    cardClasses += " bg-gray-50 text-gray-800"
+    quoteClasses += " text-gray-800 text-2xl font-medium leading-8"
     cardHeight = "h-[502px]"
-    backgroundElements = (
-      <div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat opacity-20"
-        style={{ backgroundImage: "url('/images/large-card-background.svg')", zIndex: 0 }}
-      />
-    )
   } else {
-    cardClasses += " bg-card outline outline-1 outline-border outline-offset-[-1px]"
-    quoteClasses += " text-foreground/80 text-[17px] font-normal leading-6"
-    nameClasses += " text-foreground text-sm font-normal leading-[22px]"
-    companyClasses += " text-muted-foreground text-sm font-normal leading-[22px]"
-    cardHeight = "h-[244px]"
+    cardClasses += " bg-white text-gray-700"
+    quoteClasses += " text-gray-700 text-[17px] font-normal leading-6"
+    cardHeight = "h-[280px]"
   }
 
   return (
-    <div className={`${cardClasses} ${cardWidth} ${cardHeight}`}>
-      {backgroundElements}
-      <div className={`relative z-10 font-normal break-words ${quoteClasses}`}>{quote}</div>
-      <div className="relative z-10 flex justify-start items-center gap-3">
-        <Image
-          src={avatar || "/placeholder.svg"}
-          alt={`${name} avatar`}
-          width={avatarSize}
-          height={avatarSize}
-          className={`w-${avatarSize / 4} h-${avatarSize / 4} ${avatarBorderRadius}`}
-          style={{ border: "1px solid rgba(255, 255, 255, 0.08)" }}
-        />
-        <div className="flex flex-col justify-start items-start gap-0.5">
-          <div className={nameClasses}>{name}</div>
-          <div className={companyClasses}>{company}</div>
+    <GlowingEffect
+      spread={40}
+      glow={true}
+      disabled={false}
+      proximity={64}
+      borderWidth={3}
+      className={`${cardClasses} ${cardWidth} ${cardHeight}`}
+      style={{
+        "--card-background": 
+          type === "large-teal" ? "#1e293b" : 
+          type === "large-light" ? "#f9fafb" : "#ffffff"
+      } as React.CSSProperties}
+    >
+      {/* Quote Icon */}
+      <div className="relative z-10 mb-4">
+        <div className="p-3 rounded-full bg-red-500/10 group-hover:bg-red-500/20 transition-colors duration-300">
+          <Quote className="w-6 h-6 text-red-500" />
         </div>
       </div>
-    </div>
+      
+      {/* Testimonial Quote */}
+      <div className={`relative z-10 font-normal break-words ${quoteClasses} flex-1 mb-4`}>
+        &ldquo;{quote}&rdquo;
+      </div>
+      
+      {/* Rating Stars */}
+      <div className="relative z-10 flex gap-1 mb-4">
+        {[...Array(5)].map((_, i) => (
+          <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+        ))}
+      </div>
+      
+      {/* Bottom Section */}
+      <div className="relative z-10 w-full pt-4 border-t border-gray-200/50 group-hover:border-red-500/20 transition-colors duration-300">
+        <span className="text-sm font-medium text-red-500">DigiMaxx Client</span>
+      </div>
+    </GlowingEffect>
   )
 }
 
@@ -133,11 +136,11 @@ export function TestimonialGridSection() {
       <div className="self-stretch py-6 md:py-8 lg:py-14 flex flex-col justify-center items-center gap-2">
         <div className="flex flex-col justify-start items-center gap-4">
           <h2 className="text-center text-foreground text-3xl md:text-4xl lg:text-[40px] font-semibold leading-tight md:leading-tight lg:leading-[40px]">
-            Coding made effortless
+            What Makes DigiMaxx SEOs Favourite?
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm md:text-sm lg:text-base font-medium leading-[18.20px] md:leading-relaxed lg:leading-relaxed">
-            {"Hear how developers ship products faster, collaborate seamlessly,"} <br />{" "}
-            {"and build with confidence using Pointer's powerful AI tools"}
+            {"Discover how businesses achieve accelerated growth with our AI-driven"} <br />{" "}
+            {"digital marketing strategies and data-driven optimization solutions"}
           </p>
         </div>
       </div>
