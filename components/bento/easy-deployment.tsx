@@ -1,6 +1,9 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import type React from "react"
 
-interface DeploymentEasyProps {
+interface BrandEnhancementProps {
   /** Width of component – number (px) or any CSS size value */
   width?: number | string
   /** Height of component – number (px) or any CSS size value */
@@ -9,43 +12,111 @@ interface DeploymentEasyProps {
   className?: string
 }
 
-const DeploymentEasy: React.FC<DeploymentEasyProps> = ({ width = "100%", height = "100%", className = "" }) => {
+const DeploymentEasy: React.FC<BrandEnhancementProps> = ({ width = "100%", height = "100%", className = "" }) => {
   /* ------------------------------------------------------------
    * Theme-based design tokens using global CSS variables
    * ---------------------------------------------------------- */
   const themeVars = {
-    "--deploy-primary-color": "hsl(var(--primary))",
-    "--deploy-background-color": "hsl(var(--background))",
-    "--deploy-text-color": "hsl(var(--foreground))",
-    "--deploy-text-secondary": "hsl(var(--muted-foreground))",
-    "--deploy-border-color": "hsl(var(--border))",
+    "--brand-primary-color": "hsl(var(--primary))",
+    "--brand-background-color": "hsl(var(--background))",
+    "--brand-text-color": "hsl(var(--foreground))",
+    "--brand-text-secondary": "hsl(var(--muted-foreground))",
+    "--brand-border-color": "hsl(var(--border))",
   } as React.CSSProperties
 
-  /* ------------------------------------------------------------
-   * Console log output (static for demo) – can be replaced via props
-   * ---------------------------------------------------------- */
-  const logLines = [
-    "[16:37:25.637] Running build in Washington, D.C., USA (East) – iad1",
-    "[16:37:25.638] Build machine configuration: 2 cores, 8 GB",
-    "[16:37:25.653] Retrieving list of deployment files...",
-    "[16:37:25.741] Previous build caches not available",
-    "[16:37:25.979] Downloading 84 deployment files...",
-    '[16:37:29.945] Running "vercel build"',
-    "[16:37:30.561] Vercel CLI 44.5.0",
-    '[16:37:30.880] Running "install" command: `bun install`...',
-    "[16:37:30.914] bun install v1.2.19 (aad3abea)",
-    "[16:37:30.940] Resolving dependencies",
-    "[16:37:34.436] Resolved, downloaded and extracted [1116]",
-    '[16:37:34.436] warn: incorrect peer dependency "react@19.1.0"',
-    "[16:37:37.265] Saved lockfile",
-    "[16:37:39.076] Next.js anonymous telemetry notice",
-    "[16:37:39.137] ▲ Next.js 15.2.4",
-    "[16:37:41.439] ✓ Compiled successfully",
-    "[16:37:53.979] ✓ Generated static pages",
-    "[16:38:00.585] ○ (Static) prerendered as static content",
-    "[16:38:01.099] Build Completed in /vercel/output [30s]",
-    "🚀 Deployment complete – Easy!",
-  ]
+  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [isEnhancing, setIsEnhancing] = useState(false)
+  const [brandMetrics, setBrandMetrics] = useState([
+    "[✨] Brand Consistency Score: 0%",
+    "[🎨] Visual Identity: Optimizing...",
+    "[📝] Brand Voice Analysis: In progress",
+    "[🎯] Message Alignment: 0% match",
+    "[🚀] Brand Recognition: +0%",
+    "[📊] Brand Sentiment: 0/5.0",
+    "[🌟] Customer Trust: +0%",
+    "[💼] Professional Appeal: Enhancing",
+    "[🔄] Cross-platform Sync: Initializing",
+    "[📱] Social Media Presence: Building",
+    "[🎪] Campaign Integration: Connecting",
+    "[🏆] Brand Authority: Establishing",
+    "[💡] Creative Guidelines: Updating",
+    "[🎭] Brand Personality: Defining",
+    "[🌐] Global Consistency: Progressing",
+    "[📈] Brand Value: +0% increase",
+    "[🔥] Market Position: Strengthening",
+    "[✅] Brand Enhancement: Pending",
+    "🚀 Your brand is being optimized!",
+  ])
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Animate metrics loading sequentially
+    const timers = [
+      setTimeout(() => {
+        setBrandMetrics(prev => prev.map((item, i) => 
+          i === 0 ? "[✨] Brand Consistency Score: 75%" : 
+          i === 3 ? "[🎯] Message Alignment: 70% match" : 
+          i === 4 ? "[🚀] Brand Recognition: +150%" : item
+        ))
+      }, 800),
+      setTimeout(() => {
+        setBrandMetrics(prev => prev.map((item, i) => 
+          i === 1 ? "[🎨] Visual Identity: Optimized" : 
+          i === 2 ? "[📝] Brand Voice Analysis: Complete" : 
+          i === 5 ? "[📊] Brand Sentiment: 3.2/5.0" : 
+          i === 6 ? "[🌟] Customer Trust: +120%" : item
+        ))
+      }, 1200),
+      setTimeout(() => {
+        setBrandMetrics(prev => prev.map((item, i) => 
+          i === 7 ? "[💼] Professional Appeal: Enhanced" : 
+          i === 8 ? "[🔄] Cross-platform Sync: Active" : 
+          i === 9 ? "[📱] Social Media Presence: Unified" : item
+        ))
+      }, 1600),
+      setTimeout(() => {
+        setBrandMetrics(prev => prev.map((item, i) => 
+          i === 10 ? "[🎪] Campaign Integration: Seamless" : 
+          i === 11 ? "[🏆] Brand Authority: Established" : 
+          i === 12 ? "[💡] Creative Guidelines: Updated" : item
+        ))
+      }, 2000),
+      setTimeout(() => {
+        setBrandMetrics(prev => prev.map((item, i) => 
+          i === 13 ? "[🎭] Brand Personality: Defined" : 
+          i === 14 ? "[🌐] Global Consistency: Achieved" : 
+          i === 15 ? "[📈] Brand Value: +250% increase" : item
+        ))
+      }, 2400),
+      setTimeout(() => {
+        setBrandMetrics(prev => prev.map((item, i) => 
+          i === 0 ? "[✨] Brand Consistency Score: 98%" : 
+          i === 3 ? "[🎯] Message Alignment: 95% match" : 
+          i === 4 ? "[🚀] Brand Recognition: +340%" : 
+          i === 5 ? "[📊] Brand Sentiment: 4.9/5.0" : 
+          i === 6 ? "[🌟] Customer Trust: +280%" : 
+          i === 15 ? "[📈] Brand Value: +450% increase" : 
+          i === 16 ? "[🔥] Market Position: Strengthened" : 
+          i === 17 ? "[✅] Brand Enhancement: Complete" : 
+          i === 18 ? "🚀 Your brand is now optimized!" : item
+        ))
+      }, 2800)
+    ]
+    
+    return () => timers.forEach(timer => clearTimeout(timer))
+  }, [])
+
+  const handleEnhanceClick = () => {
+    if (!isEnhancing) {
+      setIsEnhancing(true)
+      // Simulate enhancement process
+      setTimeout(() => {
+        setIsEnhancing(false)
+      }, 2000)
+    }
+  }
 
   return (
     <div
@@ -58,23 +129,30 @@ const DeploymentEasy: React.FC<DeploymentEasyProps> = ({ width = "100%", height 
         ...themeVars,
       }}
       role="img"
-      aria-label="Deployment console output with Deploy on Vercel button"
+      aria-label="Brand Enhancement console showing optimization metrics and enhance button"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* -------------------------------------------------------- */}
-      {/* Console / Terminal panel                                */}
+      {/* Brand Metrics Dashboard                                */}
       {/* -------------------------------------------------------- */}
       <div
         style={{
           position: "absolute",
           top: "50%",
           left: "50%",
-          transform: "translate(-50%, -50%)",
+          transform: `translate(-50%, -50%) ${isHovered ? 'scale(1.01)' : 'scale(1)'}`,
           width: "340px",
           height: "239px",
-          background: "linear-gradient(180deg, var(--deploy-background-color) 0%, transparent 100%)",
+          background: "linear-gradient(180deg, var(--brand-background-color) 0%, transparent 100%)",
           backdropFilter: "blur(7.907px)",
           borderRadius: "10px",
           overflow: "hidden",
+          transition: "all 0.3s ease-out",
+          opacity: isVisible ? 1 : 0,
+          boxShadow: isHovered 
+            ? "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04)" 
+            : "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
         }}
       >
         {/* Inner translucent panel – replicates subtle overlay */}
@@ -87,23 +165,33 @@ const DeploymentEasy: React.FC<DeploymentEasyProps> = ({ width = "100%", height 
           }}
         />
 
-        {/* Log text */}
+        {/* Brand metrics text */}
         <div
           style={{
             position: "relative",
             padding: "8px",
             height: "100%",
             overflow: "hidden",
-            fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', monospace",
+            fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
             fontSize: "10px",
             lineHeight: "16px",
-            color: "var(--deploy-text-color)",
+            color: "var(--brand-text-color)",
             whiteSpace: "pre",
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? "translateY(0)" : "translateY(10px)",
+            transition: "all 0.5s ease-out 0.3s",
           }}
         >
-          {logLines.map((line, index) => (
-            <p key={index} style={{ margin: 0 }}>
-              {line}
+          {brandMetrics.map((metric, index) => (
+            <p 
+              key={index} 
+              style={{ 
+                margin: 0,
+                transition: "all 0.3s ease-out",
+                animation: isEnhancing ? "pulse 1s infinite" : "none"
+              }}
+            >
+              {metric}
             </p>
           ))}
         </div>
@@ -113,7 +201,7 @@ const DeploymentEasy: React.FC<DeploymentEasyProps> = ({ width = "100%", height 
           style={{
             position: "absolute",
             inset: 0,
-            border: "0.791px solid var(--deploy-border-color)",
+            border: "0.791px solid var(--brand-border-color)",
             borderRadius: "10px",
             pointerEvents: "none",
           }}
@@ -128,16 +216,16 @@ const DeploymentEasy: React.FC<DeploymentEasyProps> = ({ width = "100%", height 
           position: "absolute",
           top: "calc(50% + 57.6px)",
           left: "50%",
-          transform: "translate(-50%, -50%)",
+          transform: `translate(-50%, -50%) ${isHovered ? 'scale(1.05)' : 'scale(1)'}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           gap: "6.375px",
           padding: "5.1px 10.2px",
-          background: "var(--deploy-primary-color)",
+          background: "var(--brand-primary-color)",
           color: "hsl(var(--primary-foreground))",
           border: "none",
-          cursor: "pointer",
+          cursor: isEnhancing ? "not-allowed" : "pointer",
           borderRadius: "8.925px",
           fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           fontSize: "16.575px",
@@ -145,12 +233,33 @@ const DeploymentEasy: React.FC<DeploymentEasyProps> = ({ width = "100%", height 
           letterSpacing: "-0.51px",
           fontWeight: 500,
           whiteSpace: "nowrap",
-          boxShadow:
-            "0px 42.075px 11.475px rgba(0, 0, 0, 0), 0px 26.775px 10.2px rgba(0, 0, 0, 0.01), 0px 15.3px 8.925px rgba(0, 0, 0, 0.05), 0px 6.375px 6.375px rgba(0, 0, 0, 0.09), 0px 1.275px 3.825px rgba(0, 0, 0, 0.1)",
+          boxShadow: isHovered
+            ? "0px 50px 15px rgba(0, 0, 0, 0), 0px 32px 12px rgba(0, 0, 0, 0.01), 0px 18px 10px rgba(0, 0, 0, 0.05), 0px 8px 8px rgba(0, 0, 0, 0.09), 0px 2px 5px rgba(0, 0, 0, 0.1)"
+            : "0px 42.075px 11.475px rgba(0, 0, 0, 0), 0px 26.775px 10.2px rgba(0, 0, 0, 0.01), 0px 15.3px 8.925px rgba(0, 0, 0, 0.05), 0px 6.375px 6.375px rgba(0, 0, 0, 0.09), 0px 1.275px 3.825px rgba(0, 0, 0, 0.1)",
+          transition: "all 0.2s ease",
+          opacity: isVisible ? 1 : 0,
+          transformOrigin: "center",
+        }}
+        onClick={handleEnhanceClick}
+        disabled={isEnhancing}
+        onMouseEnter={(e) => {
+          if (!isEnhancing) {
+            e.currentTarget.style.transform = "translate(-50%, -50%) scale(1.05)"
+          }
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = "translate(-50%, -50%) scale(1)"
         }}
       >
-        🚀 Deploy on Vercel
+        {isEnhancing ? "✨ Enhancing..." : "✨ Enhance Brand"}
       </button>
+      
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { opacity: 1; }
+          50% { opacity: 0.7; }
+        }
+      `}</style>
     </div>
   )
 }

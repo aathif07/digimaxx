@@ -1,42 +1,115 @@
 "use client"
 
+import { useState, useEffect } from "react"
 import type React from "react"
 
 const RealtimeCodingPreviews: React.FC = () => {
   const themeVars = {
     "--realtime-primary-color": "hsl(var(--primary))",
-    "--realtime-background-editor": "hsl(var(--background) / 0.8)", // Tinted gray from background
-    "--realtime-background-preview": "hsl(var(--background) / 0.8)", // Tinted gray from background
+    "--realtime-background-editor": "hsl(var(--background) / 0.8)",
+    "--realtime-background-preview": "hsl(var(--background) / 0.8)",
     "--realtime-text-color": "hsl(var(--foreground))",
     "--realtime-text-editor": "hsl(var(--foreground))",
-    "--realtime-text-preview": "hsl(var(--primary-foreground))", // For button text
+    "--realtime-text-preview": "hsl(var(--primary-foreground))",
     "--realtime-border-color": "hsl(var(--border))",
     "--realtime-border-main": "hsl(var(--border))",
     "--realtime-connection-color": "hsl(var(--muted-foreground))",
   }
 
+  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [growthMetrics, setGrowthMetrics] = useState([
+    { label: "📈 Growth Analytics Dashboard", value: "" },
+    { label: "📊 Revenue Growth:", value: "+0%" },
+    { label: "👥 Customer Acquisition:", value: "+0%" },
+    { label: "💰 ROI:", value: "0% YoY" },
+    { label: "🎯 Conversion Rate:", value: "0%" },
+    { label: "🚀 Traffic:", value: "0 monthly" },
+    { label: "📱 Mobile Users:", value: "0%" },
+    { label: "⭐ Customer Satisfaction:", value: "0/5" },
+    { label: "🔥 Hot Keywords:", value: "0 trending" },
+    { label: "📲 Social Engagement:", value: "+0%" },
+  ])
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Animate metrics loading sequentially
+    const timers = [
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 1 ? {...item, value: "+150%"} : item
+        ))
+      }, 600),
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 2 ? {...item, value: "+100%"} : item
+        ))
+      }, 900),
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 3 ? {...item, value: "200% YoY"} : item
+        ))
+      }, 1200),
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 4 ? {...item, value: "5.2%"} : item
+        ))
+      }, 1500),
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 1 ? {...item, value: "+340%"} : 
+          i === 2 ? {...item, value: "+250%"} : 
+          i === 3 ? {...item, value: "450% YoY"} : 
+          i === 4 ? {...item, value: "8.9%"} : item
+        ))
+      }, 1800),
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 5 ? {...item, value: "1.5M monthly"} : 
+          i === 6 ? {...item, value: "52%"} : 
+          i === 7 ? {...item, value: "3.7/5"} : item
+        ))
+      }, 2100),
+      setTimeout(() => {
+        setGrowthMetrics(prev => prev.map((item, i) => 
+          i === 8 ? {...item, value: "25 trending"} : 
+          i === 9 ? {...item, value: "+100%"} : 
+          i === 5 ? {...item, value: "2.3M monthly"} : 
+          i === 6 ? {...item, value: "68%"} : 
+          i === 7 ? {...item, value: "4.8/5"} : 
+          i === 8 ? {...item, value: "45 trending"} : 
+          i === 9 ? {...item, value: "+190%"} : item
+        ))
+      }, 2400)
+    ]
+    
+    return () => timers.forEach(timer => clearTimeout(timer))
+  }, [])
+
   return (
     <div
-      className="" // Remove className prop if not used
       style={
         {
-          width: "100%", // Use 100% for responsiveness within parent
-          height: "100%", // Use 100% for responsiveness within parent
+          width: "100%",
+          height: "100%",
           position: "relative",
           background: "transparent",
           ...themeVars,
         } as React.CSSProperties
       }
       role="img"
-      aria-label="Realtime Coding Previews interface showing split-screen code editor and live preview"
+      aria-label="Business Growth Analytics dashboard showing performance metrics and insights"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Left Panel - Code Editor */}
+      {/* Left Panel - Analytics Dashboard */}
       <div
         style={{
           position: "absolute",
           top: "46px",
           left: "50%",
-          transform: "translateX(-50%)",
+          transform: `translateX(-50%) ${isHovered ? 'scale(1.01)' : 'scale(1)'}`,
           width: "350px",
           height: "221px",
           background: "linear-gradient(180deg, var(--realtime-background-editor) 0%, transparent 100%)",
@@ -45,8 +118,11 @@ const RealtimeCodingPreviews: React.FC = () => {
           border: "1px solid var(--realtime-border-main)",
           overflow: "hidden",
           boxSizing: "border-box",
+          transition: "all 0.3s ease-out",
+          opacity: isVisible ? 1 : 0,
+          transformOrigin: "center",
         }}
-        data-name="code-editor"
+        data-name="analytics-dashboard"
       >
         <div
           style={{
@@ -63,12 +139,12 @@ const RealtimeCodingPreviews: React.FC = () => {
         >
           <div
             style={{
-              fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
               fontSize: "10.279px",
               lineHeight: "15.814px",
               letterSpacing: "-0.3163px",
               color: "var(--realtime-text-editor)",
-              width: "545.453px",
+              width: "100%",
               maxWidth: "100%",
               position: "relative",
               margin: 0,
@@ -76,62 +152,49 @@ const RealtimeCodingPreviews: React.FC = () => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(10px)",
+              transition: "all 0.5s ease-out 0.3s",
             }}
           >
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>switch (type) {"{"}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> case 'success':</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> return {"{"}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>
-              {" "}
-              border: theme === 'dark' ? 'border-[rgba(34,197,94,0.4)]' : 'border-green-200',
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> icon: (</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>
-              {" "}
-              &lt;svg className={"{baseIconClasses}"} fill="none" viewBox="0 0 14 14"&gt;
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> &lt;path</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>
-              {" "}
-              d="M3.85156 7.875L6.47656 10.5L10.8516 3.5"
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>
-              {" "}
-              stroke="var(--realtime-primary-color)"
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>
-              {" "}
-              strokeLinecap="round"
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}>
-              {" "}
-              strokeLinejoin="round"
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> strokeWidth="1.5"</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> /&gt;</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400, display: "block" }}> &lt;/svg&gt;</p>
+            {growthMetrics.map((metric, index) => (
+              <p 
+                key={index} 
+                style={{ 
+                  margin: 0, 
+                  whiteSpace: "pre-wrap", 
+                  fontWeight: index === 0 ? 600 : 400,
+                  color: index === 0 ? "var(--realtime-primary-color)" : "var(--realtime-text-editor)",
+                  transition: "all 0.3s ease-out"
+                }}
+              >
+                {metric.label} {metric.value}
+              </p>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Right Panel - Live Preview */}
+      {/* Right Panel - Growth Insights */}
       <div
         style={{
           position: "absolute",
           top: "46px",
           left: "calc(50% + 87.499px)",
-          transform: "translateX(-50%)",
+          transform: `translateX(-50%) ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
           width: "175px",
           height: "221px",
           background: "linear-gradient(180deg, var(--realtime-background-preview) 0%, transparent 100%)",
           backdropFilter: "blur(7.907px)",
           borderRadius: "9.488px",
           borderTopRightRadius: "9.488px",
-          // Removed the border property from here
           overflow: "hidden",
           boxSizing: "border-box",
+          transition: "all 0.4s ease-out",
+          opacity: isVisible ? 1 : 0,
+          transformOrigin: "center",
         }}
-        data-name="preview-panel"
+        data-name="growth-insights"
       >
         <div
           style={{
@@ -144,16 +207,16 @@ const RealtimeCodingPreviews: React.FC = () => {
             flexDirection: "row",
             alignItems: "flex-start",
             justifyContent: "center",
-            background: "var(--realtime-background-preview)", // Applied solid background here
+            background: "var(--realtime-background-preview)",
           }}
         >
-          {/* Download Button - Exact positioning from Figma */}
+          {/* Growth Action Button */}
           <div
             style={{
               position: "absolute",
               top: "calc(50% + 0.001px)",
               left: "calc(50% - 71.501px)",
-              transform: "translate(-50%, -50%)",
+              transform: `translate(-50%, -50%) ${isHovered ? 'scale(1.05)' : 'scale(1)'}`,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -167,9 +230,16 @@ const RealtimeCodingPreviews: React.FC = () => {
               transition: "all 0.2s ease",
               padding: "6.326px 12.651px",
               borderRadius: "11.07px",
-              boxShadow:
-                "0px 52.186px 14.233px rgba(0, 0, 0, 0), 0px 33.209px 12.651px rgba(0, 0, 0, 0.01), 0px 18.977px 11.07px rgba(0, 0, 0, 0.05), 0px 7.907px 7.907px rgba(0, 0, 0, 0.09), 0px 1.581px 4.744px rgba(0, 0, 0, 0.1)",
+              boxShadow: isHovered
+                ? "0px 60px 20px rgba(0, 0, 0, 0), 0px 40px 15px rgba(0, 0, 0, 0.01), 0px 25px 12px rgba(0, 0, 0, 0.05), 0px 12px 10px rgba(0, 0, 0, 0.09), 0px 3px 6px rgba(0, 0, 0, 0.1)"
+                : "0px 52.186px 14.233px rgba(0, 0, 0, 0), 0px 33.209px 12.651px rgba(0, 0, 0, 0.01), 0px 18.977px 11.07px rgba(0, 0, 0, 0.05), 0px 7.907px 7.907px rgba(0, 0, 0, 0.09), 0px 1.581px 4.744px rgba(0, 0, 0, 0.1)",
               boxSizing: "border-box",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translate(-50%, -50%) scale(1.05)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translate(-50%, -50%) scale(1)"
             }}
           >
             <div
@@ -179,18 +249,19 @@ const RealtimeCodingPreviews: React.FC = () => {
                 lineHeight: "31.628px",
                 letterSpacing: "-0.6326px",
                 fontWeight: 500,
-                color: "var(--realtime-text-preview)", // Changed to use theme variable
+                color: "var(--realtime-text-preview)",
                 textAlign: "left",
                 whiteSpace: "pre",
+                animation: isHovered ? "pulse 2s infinite" : "none",
               }}
             >
-              Download for macOS
+              🚀 Accelerate Growth
             </div>
           </div>
         </div>
       </div>
 
-      {/* Connection Line - Exact positioning from Figma */}
+      {/* Connection Line */}
       <div
         style={{
           position: "absolute",
@@ -202,15 +273,16 @@ const RealtimeCodingPreviews: React.FC = () => {
           justifyContent: "center",
         }}
       >
-        {/* This div now directly contains the SVG for the vertical line */}
         <div
           style={{
             position: "relative",
-            width: "2px", // Width of the line (stroke width)
-            height: "285.088px", // Length of the line
+            width: "2px",
+            height: "285.088px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            opacity: isVisible ? 1 : 0,
+            transition: "opacity 1s ease-out 0.5s",
           }}
         >
           <svg
@@ -240,14 +312,10 @@ const RealtimeCodingPreviews: React.FC = () => {
         </div>
       </div>
 
-      {/* Live Recording Indicator */}
-
-      {/* Sync Indicator at connection point */}
-
       <style jsx>{`
         @keyframes pulse {
-          0%, 100% { opacity: 0.4; }
-          50% { opacity: 1; }
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.02); }
         }
       `}</style>
     </div>

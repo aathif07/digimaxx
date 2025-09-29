@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import type React from "react"
 
 interface OneClickIntegrationsIllustrationProps {
@@ -14,13 +17,36 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
     "--oci-shadow-color": "rgba(0, 0, 0, 0.12)",
     "--oci-gradient-light-gray-start": "hsl(var(--foreground) / 0.2)",
     "--oci-gradient-light-gray-end": "transparent",
-  } as React.CSSProperties
+  } as Record<string, string>
+
+  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [animatedIcons, setAnimatedIcons] = useState<boolean[]>(Array(40).fill(false))
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Animate icons sequentially
+    const timers: NodeJS.Timeout[] = []
+    for (let i = 0; i < 40; i++) {
+      timers.push(setTimeout(() => {
+        setAnimatedIcons(prev => {
+          const newAnimated = [...prev]
+          newAnimated[i] = true
+          return newAnimated
+        })
+      }, 50 + i * 30))
+    }
+    
+    return () => timers.forEach(timer => clearTimeout(timer))
+  }, [])
 
   // Helper component for rendering each logo box
   const LogoBox: React.FC<{
     logoSvg?: React.ReactNode
     isGradientBg?: boolean
-  }> = ({ logoSvg, isGradientBg }) => {
+    index: number
+  }> = ({ logoSvg, isGradientBg, index }) => {
     const boxStyle: React.CSSProperties = {
       width: "60px",
       height: "60px",
@@ -32,6 +58,9 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
       alignItems: "center",
       overflow: "hidden",
       flexShrink: 0,
+      opacity: animatedIcons[index] ? 1 : 0,
+      transform: animatedIcons[index] ? "translateY(0) scale(1)" : "translateY(10px) scale(0.8)",
+      transition: `all 0.5s ease-out ${index * 0.02}s`,
     }
 
     const innerContentStyle: React.CSSProperties = {
@@ -203,7 +232,9 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
         ...themeVars,
       }}
       role="img"
-      aria-label="One-click integrations illustration showing a grid of connected squares"
+      aria-label="Seamless Platform Integrations - Connect with Figma, Vercel, GitHub, Slack, and VS Code"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
       {/* Background radial gradient */}
       <div
@@ -219,6 +250,8 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
             ${themeVars["--oci-foreground-color"]}66 49%, 
             ${themeVars["--oci-foreground-color"]}F5 87%, 
             ${themeVars["--oci-foreground-color"]}00 100%)`,
+          opacity: isVisible ? 1 : 0,
+          transition: "opacity 1s ease-out",
         }}
       />
 
@@ -236,6 +269,8 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
           justifyContent: "flex-start",
           alignItems: "center",
           gap: "16px",
+          transform: isHovered ? 'scale(1.02)' : 'scale(1)',
+          transition: "all 0.3s ease-out",
         }}
       >
         {/* Render rows of logo boxes */}
@@ -245,7 +280,11 @@ const OneClickIntegrationsIllustration: React.FC<OneClickIntegrationsIllustratio
             style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", gap: "16px" }}
           >
             {gridItems.slice(rowIndex * 10, (rowIndex + 1) * 10).map((item, colIndex) => (
-              <LogoBox key={colIndex} {...item} />
+              <LogoBox 
+                key={colIndex} 
+                {...item} 
+                index={rowIndex * 10 + colIndex}
+              />
             ))}
           </div>
         ))}

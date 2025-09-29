@@ -1,3 +1,6 @@
+"use client"
+
+import { useState, useEffect } from "react"
 import type React from "react"
 
 const AiCodeReviews: React.FC = () => {
@@ -12,6 +15,42 @@ const AiCodeReviews: React.FC = () => {
     "--ai-highlight-header": "hsl(var(--accent) / 0.2)",
   }
 
+  const [isHovered, setIsHovered] = useState(false)
+  const [isVisible, setIsVisible] = useState(false)
+  const [metrics, setMetrics] = useState([
+    { label: "✨ AI Content Strategy", value: "" },
+    { label: "📈 Engagement Rate:", value: "+0%" },
+    { label: "🎯 Target Audience:", value: "Millennials" },
+    { label: "📝 Content Type:", value: "Blog Posts" },
+    { label: "🔥 Trending Topics:", value: "" },
+    { label: "• Sustainable Living", value: "" },
+    { label: "• Digital Wellness", value: "" },
+    { label: "• Remote Work Tips", value: "" },
+    { label: "💡 AI Suggestions:", value: "Ready" },
+  ])
+
+  useEffect(() => {
+    setIsVisible(true)
+    
+    // Animate metrics loading
+    const timer1 = setTimeout(() => {
+      setMetrics(prev => prev.map((item, i) => 
+        i === 1 ? {...item, value: "+150%"} : item
+      ))
+    }, 800)
+    
+    const timer2 = setTimeout(() => {
+      setMetrics(prev => prev.map((item, i) => 
+        i === 1 ? {...item, value: "+250%"} : item
+      ))
+    }, 1200)
+    
+    return () => {
+      clearTimeout(timer1)
+      clearTimeout(timer2)
+    }
+  }, [])
+
   return (
     <div
       style={
@@ -24,9 +63,11 @@ const AiCodeReviews: React.FC = () => {
         } as React.CSSProperties
       }
       role="img"
-      aria-label="AI Code Reviews interface showing code suggestions with apply buttons"
+      aria-label="Content Creation AI interface showing marketing content generation"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background Message Box (Blurred) */}
+      {/* Background Content Box (Blurred) */}
       <div
         style={{
           position: "absolute",
@@ -36,11 +77,12 @@ const AiCodeReviews: React.FC = () => {
           width: "340px",
           height: "205.949px",
           background: "linear-gradient(180deg, var(--ai-background-color) 0%, transparent 100%)",
-          opacity: 0.6,
+          opacity: isVisible ? 0.6 : 0,
           borderRadius: "8.826px",
           border: "0.791px solid var(--ai-border-color)",
           overflow: "hidden",
           backdropFilter: "blur(16px)",
+          transition: "opacity 0.5s ease-out",
         }}
       >
         <div
@@ -54,7 +96,7 @@ const AiCodeReviews: React.FC = () => {
         >
           <div
             style={{
-              fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
               fontSize: "9.562px",
               lineHeight: "14.711px",
               letterSpacing: "-0.2942px",
@@ -64,43 +106,30 @@ const AiCodeReviews: React.FC = () => {
               margin: 0,
             }}
           >
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>switch (type) {"{"}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> case 'success':</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> return {"{"}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {"          border: theme === 'dark' ? 'border-[rgba(34,197,94,0.4)]' : 'border-green-200',"}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> icon: (</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'            <svg className={\'baseIconClasses\'} fill="none" viewBox="0 0 14 14">'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> &lt;path</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                d="M3.85156 7.875L6.47656 10.5L10.8516 3.5"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                stroke="var(--ai-primary-color)"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                strokeLinecap="round"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                strokeLinejoin="round"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>{'                strokeWidth="1.5"'}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> /&gt;</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> &lt;/svg&gt;</p>
+            {metrics.slice(0, 9).map((metric, index) => (
+              <p 
+                key={index} 
+                style={{ 
+                  margin: 0, 
+                  whiteSpace: "pre-wrap", 
+                  fontWeight: index === 0 || index === 4 ? 600 : 400,
+                  transition: "all 0.3s ease-out"
+                }}
+              >
+                {metric.label} {metric.value}
+              </p>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Foreground Message Box (Main) */}
+      {/* Foreground Content Box (Main) */}
       <div
         style={{
           position: "absolute",
           top: "51.336px",
           left: "50%",
-          transform: "translateX(-50%)",
+          transform: `translateX(-50%) ${isHovered ? 'scale(1.02)' : 'scale(1)'}`,
           width: "340px",
           height: "221.395px",
           background: "var(--ai-background-color)",
@@ -108,6 +137,10 @@ const AiCodeReviews: React.FC = () => {
           borderRadius: "9.488px",
           border: "1px solid var(--ai-border-main)",
           overflow: "hidden",
+          transition: "all 0.3s ease-out",
+          boxShadow: isHovered 
+            ? "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.04)" 
+            : "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)",
         }}
       >
         <div
@@ -130,6 +163,9 @@ const AiCodeReviews: React.FC = () => {
               height: "33.118px",
               background: "hsl(var(--foreground) / 0.08)",
               zIndex: 1,
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateX(0)" : "translateX(-20px)",
+              transition: "all 0.5s ease-out 0.2s",
             }}
           />
           <div
@@ -142,11 +178,14 @@ const AiCodeReviews: React.FC = () => {
               height: "45.465px",
               background: "var(--ai-highlight-primary)",
               zIndex: 1,
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateX(0)" : "translateX(20px)",
+              transition: "all 0.5s ease-out 0.4s",
             }}
           />
           <div
             style={{
-              fontFamily: "'Geist Mono', 'SF Mono', Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+              fontFamily: "'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
               fontSize: "10.279px",
               lineHeight: "15.814px",
               letterSpacing: "-0.3163px",
@@ -156,39 +195,28 @@ const AiCodeReviews: React.FC = () => {
               position: "relative",
               zIndex: 2,
               margin: 0,
+              opacity: isVisible ? 1 : 0,
+              transform: isVisible ? "translateY(0)" : "translateY(10px)",
+              transition: "all 0.5s ease-out 0.3s",
             }}
           >
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>switch (type) {"{"}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> case 'success':</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> return {"{"}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {"          border: theme === 'dark' ? 'border-[rgba(34,197,94,0.4)]' : 'border-green-200',"}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> icon: (</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'            <svg className={\'baseIconClasses\'} fill="none" viewBox="0 0 14 14">'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> &lt;path</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                d="M3.85156 7.875L6.47656 10.5L10.8516 3.5"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>{'                stroke="#22C55E"'}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                strokeLinecap="round"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>
-              {'                strokeLinejoin="round"'}
-            </p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>{'                strokeWidth="1.5"'}</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> /&gt;</p>
-            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}> &lt;/svg&gt;</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 600 }}>🚀 Content Generation</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>📊 Analytics: High Performance</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>🎯 SEO Score: 95/100</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>📈 Conversion Rate: +180%</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>✍️ Content Ideas:</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>• Email Campaigns</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>• Social Media Posts</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>• Landing Page Copy</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>• Blog Articles</p>
+            <p style={{ margin: 0, whiteSpace: "pre-wrap", fontWeight: 400 }}>🎨 Brand Voice: Optimized</p>
           </div>
           <button
             style={{
               position: "absolute",
               top: "calc(50% + 29.745px)",
               right: "20px",
-              transform: "translateY(-50%)",
+              transform: `translateY(-50%) ${isHovered ? 'scale(1.05)' : 'scale(1)'}`,
               zIndex: 3,
               display: "flex",
               alignItems: "center",
@@ -206,8 +234,15 @@ const AiCodeReviews: React.FC = () => {
               fontSize: "10.279px",
               lineHeight: "15.814px",
               letterSpacing: "-0.3163px",
-              boxShadow:
-                "0px 26.093px 7.116px rgba(0, 0, 0, 0), 0px 16.605px 6.326px rgba(0, 0, 0, 0.01), 0px 9.488px 5.535px rgba(0, 0, 0, 0.05), 0px 3.953px 3.953px rgba(0, 0, 0, 0.09), 0px 0.791px 2.372px rgba(0, 0, 0, 0.1)",
+              boxShadow: isHovered
+                ? "0px 30px 10px rgba(0, 0, 0, 0), 0px 20px 8px rgba(0, 0, 0, 0.02), 0px 12px 7px rgba(0, 0, 0, 0.06), 0px 5px 5px rgba(0, 0, 0, 0.11), 0px 1px 3px rgba(0, 0, 0, 0.12)"
+                : "0px 26.093px 7.116px rgba(0, 0, 0, 0), 0px 16.605px 6.326px rgba(0, 0, 0, 0.01), 0px 9.488px 5.535px rgba(0, 0, 0, 0.05), 0px 3.953px 3.953px rgba(0, 0, 0, 0.09), 0px 0.791px 2.372px rgba(0, 0, 0, 0.1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.transform = "translateY(-50%) scale(1.05)"
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.transform = "translateY(-50%) scale(1)"
             }}
           >
             <span
@@ -216,19 +251,27 @@ const AiCodeReviews: React.FC = () => {
                 fontWeight: 500,
               }}
             >
-              Apply changes
+              Generate Content
             </span>
             <span
               style={{
                 fontFamily: "'SF Pro', -apple-system, BlinkMacSystemFont, system-ui, sans-serif",
                 fontWeight: 500,
+                animation: isHovered ? "pulse 1.5s infinite" : "none",
               }}
             >
-              ⌘Y
+              ✨
             </span>
           </button>
         </div>
       </div>
+      
+      <style jsx>{`
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.2); }
+        }
+      `}</style>
     </div>
   )
 }
