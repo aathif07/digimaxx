@@ -123,13 +123,13 @@ export default function AboutUsSection() {
       step: 'Step 1', 
       title: 'Our Mission',
       content: 'To deliver data-driven, AI-powered marketing solutions that maximize ROI while keeping creativity at the core.', 
-      image: 'https://images.unsplash.com/photo-1723958929247-ef054b525153?q=80&w=2070&auto=format&fit=crop' 
+      image: '/a1.png' 
     },
     { 
       step: 'Step 2',
       title: 'Our Vision',
       content: 'To become the world\'s most trusted AI-driven marketing partner for businesses of all sizes.',
-      image: 'https://images.unsplash.com/photo-1723931464622-b7df7c71e380?q=80&w=2070&auto=format&fit=crop'
+      image: '/a2.png'
     },
     { 
       step: 'Step 3',
