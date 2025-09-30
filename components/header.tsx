@@ -34,7 +34,7 @@ export function Header() {
           <div className="flex items-center gap-3">
             {/* Logo Image - Even larger size */}
             <Link href="/">
-              <div className="relative w-32 h-32"> {/* Increased from w-24 h-24 to w-32 h-32 */}
+              <div className="relative w-24 h-24 md:w-32 md:h-32"> {/* Responsive logo size */}
                 <Image
                   src="/logo.png" // Replace with your actual logo path
                   alt="DigiMAXX Logo"

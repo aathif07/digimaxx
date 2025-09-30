@@ -7,7 +7,7 @@ export function HeroSection() {
   return (
     <section
       className="flex flex-col items-center text-center relative mx-auto rounded-2xl overflow-hidden my-6 py-0 px-4
-         w-full h-[400px] md:h-[600px] lg:h-[810px] md:px-0"
+         w-full h-[400px] sm:h-[500px] md:h-[600px] lg:h-[810px] md:px-0"
     >
       {/* SVG Background */}
       <div className="absolute inset-0 z-0">
@@ -18,6 +18,7 @@ export function HeroSection() {
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="xMidYMid slice"
+          className="w-full h-full"
         >
           <g clipPath="url(#clip0_186_1134)">
             <mask
@@ -437,9 +438,9 @@ export function HeroSection() {
         <Header />
       </div>
 
-      <div className="relative z-10 space-y-4 md:space-y-5 lg:space-y-6 mb-3 md:mb-4 lg:mb-5 max-w-sm md:max-w-[600px] lg:max-w-[700px] mt-16 md:mt-[120px] lg:mt-[160px] px-4">
+      <div className="relative z-10 space-y-4 md:space-y-5 lg:space-y-6 mb-3 md:mb-4 lg:mb-5 max-w-sm md:max-w-[600px] lg:max-w-[700px] mt-16 sm:mt-20 md:mt-[120px] lg:mt-[160px] px-4">
         {/* Animated and colored "Achieve Accelerated Growth" text */}
-        <h1 className="text-foreground text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight whitespace-nowrap animate-pulse">
+        <h1 className="text-foreground text-2xl sm:text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight whitespace-nowrap animate-pulse">
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-red-500 to-primary">
             Achieve Accelerated Growth
           </span>
@@ -452,12 +453,12 @@ export function HeroSection() {
 
       <div className="relative z-10 flex gap-4 flex-col sm:flex-row">
         <Link href="" target="_blank" rel="noopener noreferrer">
-          <Button className="bg-primary text-primary-foreground hover:bg-primary-dark px-8 py-3 rounded-full font-medium text-base shadow-lg">
+          <Button className="bg-primary text-primary-foreground hover:bg-primary-dark px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-base shadow-lg">
             See Maxx Impact
           </Button>
         </Link>
         <Link href="#features-section">
-          <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-8 py-3 rounded-full font-medium text-base shadow-lg ring-1 ring-white/10">
+          <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-base shadow-lg ring-1 ring-white/10">
             Learn More
           </Button>
         </Link>
