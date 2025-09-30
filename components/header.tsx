@@ -28,7 +28,7 @@ export function Header() {
   }
 
   return (
-    <header className="w-full py-4 px-4 sm:px-6 bg-background/80 backdrop-blur-sm">
+    <header className="w-full py-4 px-4 sm:px-11 bg-transparent">
       <div className="max-w-7xl mx-auto flex items-center justify-center sm:justify-between">
         {/* Logo - Centered on mobile, left-aligned on larger screens */}
         <div className="flex items-center gap-6">
@@ -65,7 +65,7 @@ export function Header() {
         <div className="sm:hidden absolute right-4">
           <Sheet>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="text-foreground p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-sm">
+              <Button variant="ghost" size="icon" className="text-foreground p-2 bg-transparent rounded-full shadow-sm">
                 <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
