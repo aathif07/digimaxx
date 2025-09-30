@@ -1,7 +1,12 @@
-import Image from "next/image"
+"use client";
+
+import { usePageAnimationControl } from "@/hooks/use-animation-control";
 import { Typewriter } from "@/components/ui/typewriter-text"
 
 export function LargeTestimonial() {
+  // Only animate on homepage and about page
+  const shouldAnimate = usePageAnimationControl(["/", "/about", "/home"]);
+
   return (
     <section className="w-full px-5 overflow-hidden flex justify-center items-center">
       <div className="flex-1 flex flex-col justify-start items-start overflow-hidden">
@@ -20,6 +25,8 @@ export function LargeTestimonial() {
                   deleteSpeed={40}
                   delay={2000}
                   className="leading-7 md:leading-10 lg:leading-[64px] font-medium text-lg md:text-3xl lg:text-6xl"
+                  animate={shouldAnimate}
+                  startDelay={500}
                 />
               </div>
             </div>

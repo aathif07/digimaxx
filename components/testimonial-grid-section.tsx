@@ -1,65 +1,73 @@
 import Image from "next/image"
 
-const testimonials = [
+interface Testimonial {
+  quote: string
+  name: string
+  company: string
+  avatar: string
+  type: string
+}
+
+const testimonials: Testimonial[] = [
   {
     quote:
-      "The real-time code suggestions from Pointer feel like having a senior engineer reviewing every line of code as you write. The accuracy of its recommendations has improved our overall code quality, reduced review time.",
-    name: "Annette Black",
-    company: "Sony",
-    avatar: "/images/avatars/annette-black.png",
+      "The SEO optimization tools in digimaxx have transformed our content strategy. Our organic traffic increased by 180% in just three months.",
+    name: "Sarah Johnson",
+    company: "TechGrowth SEO",
+    avatar: "/images/avatars/sarah-johnson.png",
     type: "large-teal",
   },
   {
     quote:
-      "Integrating Pointer into our stack was smooth, and the MCP server connections saved us days of configuration work",
-    name: "Dianne Russell",
-    company: "McDonald's",
-    avatar: "/images/avatars/dianne-russell.png",
+      "Keyword research and competitor analysis that used to take days now takes minutes with digimaxx's AI-powered insights.",
+    name: "Michael Chen",
+    company: "DigitalPulse Agency",
+    avatar: "/images/avatars/michael-chen.png",
     type: "small-dark",
   },
   {
     quote:
-      "Pointer’s multi-agent coding feature has been a game changer. We’re fixing complex bugs in hours instead of spending entire sprints on them.",
-    name: "Cameron Williamson",
-    company: "IBM",
-    avatar: "/images/avatars/cameron-williamson.png",
+      "The content optimization suggestions are incredibly accurate. We've seen a 3x improvement in our content quality scores.",
+    name: "Emma Rodriguez",
+    company: "ContentFirst Media",
+    avatar: "/images/avatars/emma-rodriguez.png",
     type: "small-dark",
   },
   {
     quote:
-      "We no longer juggle multiple tools. Pointer brought all our integrations together in one place, which simplified our entire workflow.",
-    name: "Robert Fox",
-    company: "MasterCard",
-    avatar: "/images/avatars/robert-fox.png",
+      "digimaxx's backlink analysis helped us identify 200+ high-value link opportunities we'd completely missed before.",
+    name: "David Wilson",
+    company: "LinkBuilder Pro",
+    avatar: "/images/avatars/david-wilson.png",
     type: "small-dark",
   },
   {
     quote:
-      "We started with the free plan just to test it out, but within a week we upgraded to Pro. Now, we can’t imagine coding without it",
-    name: "Darlene Robertson",
-    company: "Ferrari",
-    avatar: "/images/avatars/darlene-robertson.png",
+      "Our client retention rate jumped to 95% after implementing digimaxx's SEO recommendations across their campaigns.",
+    name: "Jessica Taylor",
+    company: "SEO Masters Inc",
+    avatar: "/images/avatars/jessica-taylor.png",
     type: "small-dark",
   },
   {
     quote:
-      "Collaborative coding feels effortless now. With Pointer’s real-time previews, pair programming has become faster and more productive.",
-    name: "Cody Fisher",
-    company: "Apple",
-    avatar: "/images/avatars/cody-fisher.png",
+      "The competitor gap analysis feature alone is worth the subscription. We've captured keywords from our top 3 competitors.",
+    name: "Robert Kim",
+    company: "RankBoost Agency",
+    avatar: "/images/avatars/robert-kim.png",
     type: "small-dark",
   },
   {
     quote:
-      "Deploying on Vercel with Pointer was not just simple, it felt seamless. We went from coding to seeing our changes live in minutes without worrying about build pipelines or configuration issues.",
-    name: "Albert Flores",
-    company: "Louis Vuitton",
-    avatar: "/images/avatars/albert-flores.png",
+      "From technical SEO audits to content planning, digimaxx covers our entire SEO workflow. It's become our indispensable SEO partner.",
+    name: "Amanda Foster",
+    company: "WebVisibility Group",
+    avatar: "/images/avatars/amanda-foster.png",
     type: "large-light",
   },
 ]
 
-const TestimonialCard = ({ quote, name, company, avatar, type }) => {
+const TestimonialCard = ({ quote, name, company, avatar, type }: Testimonial) => {
   const isLargeCard = type.startsWith("large")
   const avatarSize = isLargeCard ? 48 : 36
   const avatarBorderRadius = isLargeCard ? "rounded-[41px]" : "rounded-[30.75px]"
@@ -133,11 +141,11 @@ export function TestimonialGridSection() {
       <div className="self-stretch py-6 md:py-8 lg:py-14 flex flex-col justify-center items-center gap-2">
         <div className="flex flex-col justify-start items-center gap-4">
           <h2 className="text-center text-foreground text-3xl md:text-4xl lg:text-[40px] font-semibold leading-tight md:leading-tight lg:leading-[40px]">
-            Coding made effortless
+            What Makes digimaxx SEOs Favourite?
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm md:text-sm lg:text-base font-medium leading-[18.20px] md:leading-relaxed lg:leading-relaxed">
-            {"Hear how developers ship products faster, collaborate seamlessly,"} <br />{" "}
-            {"and build with confidence using Pointer's powerful AI tools"}
+            {"Discover why SEO professionals trust digimaxx to boost their rankings,"} <br />{" "}
+            {"drive organic traffic, and maximize their digital marketing ROI"}
           </p>
         </div>
       </div>
