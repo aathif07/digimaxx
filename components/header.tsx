@@ -28,23 +28,16 @@ export function Header() {
   }
 
   return (
-    <header className="w-full py-4 px-6">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
+    <header className="w-full py-4 px-4 sm:px-6 bg-background/80 backdrop-blur-sm">
+      <div className="max-w-7xl mx-auto flex items-center justify-center sm:justify-between">
+        {/* Logo - Centered on mobile, left-aligned on larger screens */}
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
-            {/* Logo Image - Even larger size */}
-            <Link href="/">
-              <div className="relative w-24 h-24 md:w-32 md:h-32"> {/* Responsive logo size */}
-                <Image
-                  src="/logo.png" // Replace with your actual logo path
-                  alt="DigiMAXX Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+            <Link href="/" className="flex items-center">
+              <div className="flex items-center gap-2">
+                <Image src="/logo.png" alt="DigiMaxx Logo" width={100} height={100} />
               </div>
             </Link>
-            {/* Removed the "DigiMAXX" text as requested */}
           </div>
           <nav className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
@@ -59,29 +52,37 @@ export function Header() {
             ))}
           </nav>
         </div>
-        <div className="flex items-center gap-4">
-          <Link href="" target="_blank" rel="noopener noreferrer" className="hidden md:block">
-            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
+        {/* Right side - Hidden on mobile to keep logo centered */}
+        <div className="hidden sm:flex items-center gap-2 sm:gap-4">
+          <Link href="" target="_blank" rel="noopener noreferrer">
+            <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-4 sm:px-6 py-2 rounded-full font-medium shadow-sm text-sm">
               Get Started
             </Button>
           </Link>
+        </div>
+
+        {/* Mobile Menu Button - Floating on the right */}
+        <div className="sm:hidden absolute right-4">
           <Sheet>
-            <SheetTrigger asChild className="md:hidden">
-              <Button variant="ghost" size="icon" className="text-foreground">
-                <Menu className="h-7 w-7" />
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-foreground p-2 bg-background/80 backdrop-blur-sm rounded-full shadow-sm">
+                <Menu className="h-5 w-5" />
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="bottom" className="bg-background border-t border-border text-foreground">
               <SheetHeader>
-                <SheetTitle className="text-left text-xl font-semibold text-foreground">Navigation</SheetTitle>
+                <SheetTitle className="text-left text-xl font-semibold text-foreground flex items-center gap-3">
+                  <div className="w-8 h-8 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center shadow-lg">
+                  </div>
+                </SheetTitle>
               </SheetHeader>
               <nav className="flex flex-col gap-4 mt-6">
                 {navItems.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    onClick={(e) => handleScroll(e, item.href)} // Add onClick handler
+                    onClick={(e) => handleScroll(e, item.href)}
                     className="text-[#888888] hover:text-foreground justify-start text-lg py-2"
                   >
                     {item.name}

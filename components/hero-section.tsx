@@ -451,14 +451,14 @@ export function HeroSection() {
         </p>
       </div>
 
-      <div className="relative z-10 flex gap-4 flex-col sm:flex-row">
+      <div className="relative z-10 flex gap-4 flex-col sm:flex-row justify-center items-center mt-8 sm:mt-12 md:mt-16">
         <Link href="" target="_blank" rel="noopener noreferrer">
-          <Button className="bg-primary text-primary-foreground hover:bg-primary-dark px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-base shadow-lg">
+          <Button className="bg-red-600 text-white hover:bg-red-700 px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-base shadow-lg">
             See Maxx Impact
           </Button>
         </Link>
         <Link href="#features-section">
-          <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-base shadow-lg ring-1 ring-white/10">
+          <Button className="bg-white/10 border-2 border-white/30 text-white hover:bg-white/20 hover:border-white/50 px-6 sm:px-8 py-2 sm:py-3 rounded-full font-medium text-base shadow-lg backdrop-blur-sm transition-all duration-300">
             Learn More
           </Button>
         </Link>

@@ -17,13 +17,13 @@ export default function LandingPage() {
         <main className="relative">
           <HeroSection />
           {/* Dashboard Preview Wrapper */}
-          <div className="absolute bottom-[-100px] md:bottom-[-250px] left-1/2 transform -translate-x-1/2 z-30">
+          <div className="absolute bottom-[-150px] md:bottom-[-300px] left-1/2 transform -translate-x-1/2 z-30">
             <AnimatedSection>
               <DashboardPreview />
             </AnimatedSection>
           </div>
         </main>
-        <AnimatedSection className="relative z-10 px-6 mt-[300px] md:mt-[280px]" delay={0.1}>
+        <AnimatedSection className="relative z-10 px-6 mt-[350px] md:mt-[330px]" delay={0.1}>
           <DemoOne />
         </AnimatedSection>
         <AnimatedSection id="features-section" className="relative z-10 mt-16" delay={0.2}>
