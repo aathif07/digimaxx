@@ -6,12 +6,16 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"
 import { Menu } from "lucide-react"
 import Link from "next/link" // Import Link for client-side navigation
+import Image from "next/image" // Import Image for logo
+
+interface NavItem {
+  name: string
+  href: string
+}
 
 export function Header() {
-  const navItems = [
-    { name: "Services", href: "#features-section" }, // Updated from Features to Services
-    { name: "Pricing", href: "#pricing-section" },
-    { name: "Testimonials", href: "#testimonials-section" },
+  const navItems: NavItem[] = [
+   
   ]
 
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
@@ -28,7 +32,19 @@ export function Header() {
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-3">
-            <span className="text-foreground text-xl font-semibold">DigiMAXX</span>
+            {/* Logo Image - Even larger size */}
+            <Link href="/">
+              <div className="relative w-32 h-32"> {/* Increased from w-24 h-24 to w-32 h-32 */}
+                <Image
+                  src="/logo.png" // Replace with your actual logo path
+                  alt="DigiMAXX Logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+            </Link>
+            {/* Removed the "DigiMAXX" text as requested */}
           </div>
           <nav className="hidden md:flex items-center gap-2">
             {navItems.map((item) => (
@@ -44,7 +60,7 @@ export function Header() {
           </nav>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="https://vercel.com/home" target="_blank" rel="noopener noreferrer" className="hidden md:block">
+          <Link href="" target="_blank" rel="noopener noreferrer" className="hidden md:block">
             <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
               Get Started
             </Button>
@@ -71,7 +87,7 @@ export function Header() {
                     {item.name}
                   </Link>
                 ))}
-                <Link href="https://vercel.com/home" target="_blank" rel="noopener noreferrer" className="w-full mt-4">
+                <Link href="" target="_blank" rel="noopener noreferrer" className="w-full mt-4">
                   <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90 px-6 py-2 rounded-full font-medium shadow-sm">
                     Get Started
                   </Button>

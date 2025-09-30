@@ -111,7 +111,7 @@ export function CTASection() {
             brand ubiquitous.
           </p>
         </div>
-        <Link href="https://vercel.com/home" target="_blank" rel="noopener noreferrer">
+        <Link href="" target="_blank" rel="noopener noreferrer">
           <Button
             className="px-[30px] py-2 bg-primary text-primary-foreground text-base font-medium leading-6 rounded-[99px] shadow-[0px_0px_0px_4px_rgba(255,255,255,0.13)] hover:bg-primary-dark transition-all duration-200"
             size="lg"

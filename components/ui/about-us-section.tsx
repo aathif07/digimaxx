@@ -135,7 +135,7 @@ export default function AboutUsSection() {
       step: 'Step 3',
       title: 'Our Values',
       content: 'Innovation • Transparency • Results • Collaboration • Adaptability',
-      image: 'https://images.unsplash.com/photo-1725961476494-efa87ae3106a?q=80&w=2070&auto=format&fit=crop'
+      image: '/a4.png'
     },
   ]
 

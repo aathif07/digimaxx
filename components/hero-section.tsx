@@ -438,8 +438,11 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 space-y-4 md:space-y-5 lg:space-y-6 mb-3 md:mb-4 lg:mb-5 max-w-sm md:max-w-[600px] lg:max-w-[700px] mt-16 md:mt-[120px] lg:mt-[160px] px-4">
-        <h1 className="text-foreground text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight whitespace-nowrap">
-          Achieve Accelerated Growth
+        {/* Animated and colored "Achieve Accelerated Growth" text */}
+        <h1 className="text-foreground text-2xl md:text-3xl lg:text-5xl font-semibold leading-tight whitespace-nowrap animate-pulse">
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary via-red-500 to-primary">
+            Achieve Accelerated Growth
+          </span>
         </h1>
         <p className="text-muted-foreground text-base md:text-base lg:text-lg font-medium leading-relaxed max-w-lg mx-auto">
           Innovative AI-driven strategies to make your brand ubiquitous, stay ahead of the competition and drive
@@ -448,7 +451,7 @@ export function HeroSection() {
       </div>
 
       <div className="relative z-10 flex gap-4 flex-col sm:flex-row">
-        <Link href="https://vercel.com/home" target="_blank" rel="noopener noreferrer">
+        <Link href="" target="_blank" rel="noopener noreferrer">
           <Button className="bg-primary text-primary-foreground hover:bg-primary-dark px-8 py-3 rounded-full font-medium text-base shadow-lg">
             See Maxx Impact
           </Button>

@@ -9,51 +9,58 @@ export function PricingSection() {
 
   const pricingPlans = [
     {
-      name: "Free",
-      monthlyPrice: "$0",
-      annualPrice: "$0",
-      description: "Perfect for individuals starting their journey.",
+      name: "Starter",
+      monthlyPrice: "$299",
+      annualPrice: "$249",
+      description: "Perfect for small businesses starting their digital journey.",
       features: [
-        "Real-time code suggestions",
-        "Basic integration logos",
-        "Single MCP server connection",
-        "Up to 2 AI coding agents",
-        "Vercel deployments with Pointer branding",
+        "AI-powered content creation",
+        "Basic SEO optimization",
+        "Social media management (3 platforms)",
+        "Monthly performance reports",
+        "Email marketing campaigns",
+        "Basic analytics dashboard",
       ],
       buttonText: "Get Started",
       buttonClass:
         "bg-zinc-300 shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] outline outline-0.5 outline-[#1e29391f] outline-offset-[-0.5px] text-gray-800 text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-zinc-400",
     },
     {
-      name: "Pro",
-      monthlyPrice: "$20",
-      annualPrice: "$16",
-      description: "Ideal for professionals.",
+      name: "Growth",
+      monthlyPrice: "$599",
+      annualPrice: "$499",
+      description: "Ideal for growing businesses ready to scale.",
       features: [
-        "Enhanced real-time previews",
-        "Unlimited integrations with custom logos",
-        "Multiple MCP server connections",
-        "Up to 10 concurrent AI coding agents",
-        "Collaborative coding with team chat",
-        "Advanced version control integrations",
-        "Priority email and chat support",
+        "Advanced AI content strategy",
+        "Multi-channel campaign management",
+        "Advanced SEO & local optimization",
+        "Social media management (all platforms)",
+        "Lead generation & nurturing",
+        "Conversion rate optimization",
+        "Weekly strategy calls",
+        "Advanced analytics & insights",
+        "Marketing automation workflows",
       ],
-      buttonText: "Join now",
+      buttonText: "Start Growing",
       buttonClass:
-        "bg-primary-foreground shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] text-primary text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-primary-foreground/90",
+        "bg-red-600 shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] text-white text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-red-700",
       popular: true,
     },
     {
-      name: "Ultra",
-      monthlyPrice: "$200",
-      annualPrice: "$160",
-      description: "Tailored solutions for teams.",
+      name: "Enterprise",
+      monthlyPrice: "$1,299",
+      annualPrice: "$1,099",
+      description: "Comprehensive solutions for large organizations.",
       features: [
-        "Dedicated account support",
-        "Unlimited MCP server clusters",
-        "Unlimited AI coding agents",
-        "Enterprise-grade security and compliance",
-        "Priority deployments and SLA guarantees",
+        "Full-service digital marketing",
+        "Dedicated account manager",
+        "Custom AI marketing strategies",
+        "Unlimited campaign optimization",
+        "24/7 priority support",
+        "Advanced competitor analysis",
+        "Custom integrations & APIs",
+        "Quarterly business reviews",
+        "White-label reporting",
       ],
       buttonText: "Talk to Sales",
       buttonClass:
@@ -66,11 +73,10 @@ export function PricingSection() {
       <div className="self-stretch relative flex flex-col justify-center items-center gap-2 py-0">
         <div className="flex flex-col justify-start items-center gap-4">
           <h2 className="text-center text-foreground text-4xl md:text-5xl font-semibold leading-tight md:leading-[40px]">
-            Pricing built for every developer
+            Pricing built for every business
           </h2>
           <p className="self-stretch text-center text-muted-foreground text-sm font-medium leading-tight">
-            Choose a plan that fits your coding workflow, from individuals starting out to <br /> growing professionals
-            and large organizations.
+            Choose a plan that fits your marketing goals, from startups beginning their journey to <br /> established enterprises seeking market domination.
           </p>
         </div>
         <div className="pt-4">
@@ -82,7 +88,7 @@ export function PricingSection() {
               <span
                 className={`text-center text-sm font-medium leading-tight ${isAnnual ? "text-accent-foreground" : "text-zinc-400"}`}
               >
-                Annually
+                Annually (Save 20%)
               </span>
             </button>
             <button
@@ -102,19 +108,19 @@ export function PricingSection() {
         {pricingPlans.map((plan) => (
           <div
             key={plan.name}
-            className={`flex-1 p-4 overflow-hidden rounded-xl flex flex-col justify-start items-start gap-6 ${plan.popular ? "bg-primary shadow-[0px_4px_8px_-2px_rgba(0,0,0,0.10)]" : "bg-gradient-to-b from-gray-50/5 to-gray-50/0"}`}
+            className={`flex-1 p-4 overflow-hidden rounded-xl flex flex-col justify-start items-start gap-6 ${plan.popular ? "bg-red-600 shadow-[0px_4px_8px_-2px_rgba(0,0,0,0.10)]" : "bg-gradient-to-b from-gray-50/5 to-gray-50/0"}`}
             style={plan.popular ? {} : { outline: "1px solid hsl(var(--border))", outlineOffset: "-1px" }}
           >
             <div className="self-stretch flex flex-col justify-start items-start gap-6">
               <div className="self-stretch flex flex-col justify-start items-start gap-8">
                 <div
-                  className={`w-full h-5 text-sm font-medium leading-tight ${plan.popular ? "text-primary-foreground" : "text-zinc-200"}`}
+                  className={`w-full h-5 text-sm font-medium leading-tight ${plan.popular ? "text-white" : "text-zinc-200"}`}
                 >
                   {plan.name}
                   {plan.popular && (
-                    <div className="ml-2 px-2 overflow-hidden rounded-full justify-center items-center gap-2.5 inline-flex mt-0 py-0.5 bg-gradient-to-b from-primary-light/50 to-primary-light bg-white">
-                      <div className="text-center text-primary-foreground text-xs font-normal leading-tight break-words">
-                        Popular
+                    <div className="ml-2 px-2 overflow-hidden rounded-full justify-center items-center gap-2.5 inline-flex mt-0 py-0.5 bg-white/20">
+                      <div className="text-center text-white text-xs font-normal leading-tight break-words">
+                        Most Popular
                       </div>
                     </div>
                   )}
@@ -122,7 +128,7 @@ export function PricingSection() {
                 <div className="self-stretch flex flex-col justify-start items-start gap-1">
                   <div className="flex justify-start items-center gap-1.5">
                     <div
-                      className={`relative h-10 flex items-center text-3xl font-medium leading-10 ${plan.popular ? "text-primary-foreground" : "text-zinc-50"}`}
+                      className={`relative h-10 flex items-center text-3xl font-medium leading-10 ${plan.popular ? "text-white" : "text-zinc-50"}`}
                     >
                       <span className="invisible">{isAnnual ? plan.annualPrice : plan.monthlyPrice}</span>
                       <span
@@ -149,13 +155,13 @@ export function PricingSection() {
                       </span>
                     </div>
                     <div
-                      className={`text-center text-sm font-medium leading-tight ${plan.popular ? "text-primary-foreground/70" : "text-zinc-400"}`}
+                      className={`text-center text-sm font-medium leading-tight ${plan.popular ? "text-white/70" : "text-zinc-400"}`}
                     >
                       /month
                     </div>
                   </div>
                   <div
-                    className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-primary-foreground/70" : "text-zinc-400"}`}
+                    className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-white/70" : "text-zinc-400"}`}
                   >
                     {plan.description}
                   </div>
@@ -166,7 +172,7 @@ export function PricingSection() {
               >
                 <div className="px-1.5 flex justify-center items-center gap-2">
                   <span
-                    className={`text-center text-sm font-medium leading-tight ${plan.name === "Free" ? "text-gray-800" : plan.name === "Pro" ? "text-primary" : "text-zinc-950"}`}
+                    className={`text-center text-sm font-medium leading-tight ${plan.name === "Starter" ? "text-gray-800" : plan.name === "Growth" ? "text-white" : "text-zinc-950"}`}
                   >
                     {plan.buttonText}
                   </span>
@@ -175,21 +181,21 @@ export function PricingSection() {
             </div>
             <div className="self-stretch flex flex-col justify-start items-start gap-4">
               <div
-                className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-primary-foreground/70" : "text-muted-foreground"}`}
+                className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-white/70" : "text-muted-foreground"}`}
               >
-                {plan.name === "Free" ? "Get Started today:" : "Everything in Free +"}
+                {plan.name === "Starter" ? "Everything you need to start:" : "Everything in Starter, plus:"}
               </div>
               <div className="self-stretch flex flex-col justify-start items-start gap-3">
                 {plan.features.map((feature) => (
                   <div key={feature} className="self-stretch flex justify-start items-center gap-2">
                     <div className="w-4 h-4 flex items-center justify-center">
                       <Check
-                        className={`w-full h-full ${plan.popular ? "text-primary-foreground" : "text-muted-foreground"}`}
+                        className={`w-full h-full ${plan.popular ? "text-white" : "text-muted-foreground"}`}
                         strokeWidth={2}
                       />
                     </div>
                     <div
-                      className={`leading-tight font-normal text-sm text-left ${plan.popular ? "text-primary-foreground" : "text-muted-foreground"}`}
+                      className={`leading-tight font-normal text-sm text-left ${plan.popular ? "text-white" : "text-muted-foreground"}`}
                     >
                       {feature}
                     </div>
