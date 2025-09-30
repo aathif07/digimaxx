@@ -1,211 +1,166 @@
 "use client"
 
-import { useState } from "react"
-import { Check } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import * as React from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import { cn } from '@/lib/utils'
+
+interface Solution {
+    imgSrc: string
+    alt: string
+}
+
+interface AnimatedSolutionGridProps {
+    solutions: Solution[]
+    badgeText?: string
+    title: React.ReactNode
+    description: React.ReactNode
+    ctaText: string
+    ctaHref: string
+    className?: string
+}
+
+const imagePositions = [
+    { top: '5%', left: '15%', className: 'hidden lg:block w-24 h-24' },
+    { top: '15%', left: '35%', className: 'hidden md:block w-20 h-20' },
+    { top: '5%', left: '55%', className: 'hidden md:block w-16 h-16' },
+    { top: '10%', right: '15%', className: 'hidden lg:block w-28 h-28' },
+    { top: '25%', right: '5%', className: 'hidden md:block w-20 h-20' },
+    { top: '45%', right: '10%', className: 'hidden lg:block w-24 h-24' },
+    { top: '50%', left: '5%', className: 'hidden md:block w-28 h-28' },
+    { bottom: '5%', left: '20%', className: 'hidden lg:block w-20 h-20' },
+    { bottom: '15%', left: '45%', className: 'hidden md:block w-16 h-16' },
+    { bottom: '10%', right: '30%', className: 'hidden md:block w-24 h-24' },
+    { bottom: '2%', right: '15%', className: 'hidden lg:block w-20 h-20' },
+    { top: '10%', left: '5%', className: 'block md:hidden w-16 h-16' },
+    { top: '5%', right: '10%', className: 'block md:hidden w-20 h-20' },
+    { bottom: '5%', left: '10%', className: 'block md:hidden w-20 h-20' },
+    { bottom: '10%', right: '5%', className: 'block md:hidden w-16 h-16' },
+]
+
+const imageVariants = {
+    initial: { opacity: 0, scale: 0.5 },
+    animate: {
+        opacity: 1,
+        scale: 1,
+        transition: {
+            type: 'spring' as const,
+            stiffness: 260,
+            damping: 20,
+            delay: Math.random() * 0.5,
+        }
+    },
+}
+
+const floatingAnimation = () => ({
+    y: [0, Math.random() * -15 - 5, 0],
+    transition: {
+        duration: Math.random() * 4 + 5,
+        repeat: Infinity,
+        repeatType: 'reverse' as const,
+        ease: 'easeInOut' as const,
+    },
+})
+
+const AnimatedSolutionGrid = ({
+    solutions,
+    badgeText = 'Our Solutions',
+    title,
+    description,
+    ctaText,
+    ctaHref,
+    className,
+}: AnimatedSolutionGridProps) => {
+    return (
+        <section
+            className={cn(
+                'relative w-full max-w-7xl mx-auto py-32 sm:py-40 px-4',
+                className
+            )}
+        >
+            {solutions.slice(0, imagePositions.length).map((solution, index) => (
+                <motion.div
+                    key={index}
+                    className={cn('absolute rounded-lg shadow-xl', imagePositions[index].className)}
+                    style={{
+                        top: imagePositions[index].top,
+                        left: imagePositions[index].left,
+                        right: imagePositions[index].right,
+                        bottom: imagePositions[index].bottom,
+                    }}
+                    variants={imageVariants}
+                    initial="initial"
+                    animate="animate"
+                    whileHover={{ scale: 1.1, zIndex: 20 }}
+                    custom={index}
+                >
+                    <motion.img
+                        src={solution.imgSrc}
+                        alt={solution.alt}
+                        className="w-full h-full object-contain rounded-lg bg-white/10 backdrop-blur-sm p-2"
+                        animate={floatingAnimation()}
+                    />
+                </motion.div>
+            ))}
+
+            <div className="relative z-10 flex flex-col items-center text-center">
+                {badgeText && (
+                    <div className="mb-4 inline-block rounded-full bg-red-600 px-3 py-1 text-sm font-semibold text-white">
+                        {badgeText}
+                    </div>
+                )}
+                <h1 className="text-4xl md:text-6xl font-bold tracking-tighter text-foreground mb-4 max-w-3xl">
+                    {title}
+                </h1>
+                <p className="max-w-xl text-lg text-muted-foreground mb-8">
+                    {description}
+                </p>
+                <a
+                    href={ctaHref}
+                    className="inline-flex items-center justify-center rounded-full bg-red-600 px-6 py-3 text-base font-medium text-white shadow-sm transition-colors hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+                >
+                    {ctaText}
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                </a>
+            </div>
+        </section>
+    )
+}
+
+const solutions = [
+    { imgSrc: 'https://cdn.simpleicons.org/google/4285F4', alt: 'Google Analytics & Ads' },
+    { imgSrc: 'https://cdn.simpleicons.org/facebook/1877F2', alt: 'Facebook Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/instagram/E4405F', alt: 'Instagram Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/linkedin/0A66C2', alt: 'LinkedIn Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/twitter/1DA1F2', alt: 'Twitter Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/shopify/7AB55C', alt: 'E-commerce Solutions' },
+    { imgSrc: 'https://cdn.simpleicons.org/canva/00C4CC', alt: 'Design & Branding' },
+    { imgSrc: 'https://cdn.simpleicons.org/mailchimp/FFE01B', alt: 'Email Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/wordpress/21759B', alt: 'Content Management' },
+    { imgSrc: 'https://cdn.simpleicons.org/microsoft/5E5E5E', alt: 'Microsoft Solutions' },
+    { imgSrc: 'https://cdn.simpleicons.org/amazonaws/FF9900', alt: 'Cloud Solutions' },
+    { imgSrc: 'https://cdn.simpleicons.org/spotify/1ED760', alt: 'Audio Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/zoom/2D8CFF', alt: 'Video Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/apple/000000', alt: 'iOS Marketing' },
+    { imgSrc: 'https://cdn.simpleicons.org/android/3DDC84', alt: 'Android Marketing' },
+]
 
 export function PricingSection() {
-  const [isAnnual, setIsAnnual] = useState(true)
-
-  const pricingPlans = [
-    {
-      name: "Starter",
-      monthlyPrice: "$299",
-      annualPrice: "$249",
-      description: "Perfect for small businesses starting their digital journey.",
-      features: [
-        "AI-powered content creation",
-        "Basic SEO optimization",
-        "Social media management (3 platforms)",
-        "Monthly performance reports",
-        "Email marketing campaigns",
-        "Basic analytics dashboard",
-      ],
-      buttonText: "Get Started",
-      buttonClass:
-        "bg-zinc-300 shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] outline outline-0.5 outline-[#1e29391f] outline-offset-[-0.5px] text-gray-800 text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-zinc-400",
-    },
-    {
-      name: "Growth",
-      monthlyPrice: "$599",
-      annualPrice: "$499",
-      description: "Ideal for growing businesses ready to scale.",
-      features: [
-        "Advanced AI content strategy",
-        "Multi-channel campaign management",
-        "Advanced SEO & local optimization",
-        "Social media management (all platforms)",
-        "Lead generation & nurturing",
-        "Conversion rate optimization",
-        "Weekly strategy calls",
-        "Advanced analytics & insights",
-        "Marketing automation workflows",
-      ],
-      buttonText: "Start Growing",
-      buttonClass:
-        "bg-red-600 shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] text-white text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-red-700",
-      popular: true,
-    },
-    {
-      name: "Enterprise",
-      monthlyPrice: "$1,299",
-      annualPrice: "$1,099",
-      description: "Comprehensive solutions for large organizations.",
-      features: [
-        "Full-service digital marketing",
-        "Dedicated account manager",
-        "Custom AI marketing strategies",
-        "Unlimited campaign optimization",
-        "24/7 priority support",
-        "Advanced competitor analysis",
-        "Custom integrations & APIs",
-        "Quarterly business reviews",
-        "White-label reporting",
-      ],
-      buttonText: "Talk to Sales",
-      buttonClass:
-        "bg-secondary shadow-[0px_1px_1px_-0.5px_rgba(16,24,40,0.20)] text-secondary-foreground text-shadow-[0px_1px_1px_rgba(16,24,40,0.08)] hover:bg-secondary/90",
-    },
-  ]
-
-  return (
-    <section className="w-full px-5 overflow-hidden flex flex-col justify-start items-center my-0 py-8 md:py-14">
-      <div className="self-stretch relative flex flex-col justify-center items-center gap-2 py-0">
-        <div className="flex flex-col justify-start items-center gap-4">
-          <h2 className="text-center text-foreground text-4xl md:text-5xl font-semibold leading-tight md:leading-[40px]">
-            Pricing built for every business
-          </h2>
-          <p className="self-stretch text-center text-muted-foreground text-sm font-medium leading-tight">
-            Choose a plan that fits your marketing goals, from startups beginning their journey to <br /> established enterprises seeking market domination.
-          </p>
+    return (
+        <div className="w-full bg-background">
+            <AnimatedSolutionGrid
+                solutions={solutions}
+                title={
+                    <>
+                        Elevate Your Brand with Our
+                        <br />
+                        Solutions
+                    </>
+                }
+                description="Save time and effort with our automation features. Routine SEO tasks are streamlined, allowing you to focus on strategic growth."
+                ctaText="Explore Our Integration Library"
+                ctaHref="#integrations"
+            />
         </div>
-        <div className="pt-4">
-          <div className="p-0.5 bg-muted rounded-lg outline outline-1 outline-[#0307120a] outline-offset-[-1px] flex justify-start items-center gap-1 md:mt-0">
-            <button
-              onClick={() => setIsAnnual(true)}
-              className={`pl-2 pr-1 py-1 flex justify-start items-start gap-2 rounded-md ${isAnnual ? "bg-accent shadow-[0px_1px_1px_-0.5px_rgba(0,0,0,0.08)]" : ""}`}
-            >
-              <span
-                className={`text-center text-sm font-medium leading-tight ${isAnnual ? "text-accent-foreground" : "text-zinc-400"}`}
-              >
-                Annually (Save 20%)
-              </span>
-            </button>
-            <button
-              onClick={() => setIsAnnual(false)}
-              className={`px-2 py-1 flex justify-start items-start rounded-md ${!isAnnual ? "bg-accent shadow-[0px_1px_1px_-0.5px_rgba(0,0,0,0.08)]" : ""}`}
-            >
-              <span
-                className={`text-center text-sm font-medium leading-tight ${!isAnnual ? "text-accent-foreground" : "text-zinc-400"}`}
-              >
-                Monthly
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="self-stretch px-5 flex flex-col md:flex-row justify-start items-start gap-4 md:gap-6 mt-6 max-w-[1100px] mx-auto">
-        {pricingPlans.map((plan) => (
-          <div
-            key={plan.name}
-            className={`flex-1 p-4 overflow-hidden rounded-xl flex flex-col justify-start items-start gap-6 ${plan.popular ? "bg-red-600 shadow-[0px_4px_8px_-2px_rgba(0,0,0,0.10)]" : "bg-gradient-to-b from-gray-50/5 to-gray-50/0"}`}
-            style={plan.popular ? {} : { outline: "1px solid hsl(var(--border))", outlineOffset: "-1px" }}
-          >
-            <div className="self-stretch flex flex-col justify-start items-start gap-6">
-              <div className="self-stretch flex flex-col justify-start items-start gap-8">
-                <div
-                  className={`w-full h-5 text-sm font-medium leading-tight ${plan.popular ? "text-white" : "text-zinc-200"}`}
-                >
-                  {plan.name}
-                  {plan.popular && (
-                    <div className="ml-2 px-2 overflow-hidden rounded-full justify-center items-center gap-2.5 inline-flex mt-0 py-0.5 bg-white/20">
-                      <div className="text-center text-white text-xs font-normal leading-tight break-words">
-                        Most Popular
-                      </div>
-                    </div>
-                  )}
-                </div>
-                <div className="self-stretch flex flex-col justify-start items-start gap-1">
-                  <div className="flex justify-start items-center gap-1.5">
-                    <div
-                      className={`relative h-10 flex items-center text-3xl font-medium leading-10 ${plan.popular ? "text-white" : "text-zinc-50"}`}
-                    >
-                      <span className="invisible">{isAnnual ? plan.annualPrice : plan.monthlyPrice}</span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: isAnnual ? 1 : 0,
-                          transform: `scale(${isAnnual ? 1 : 0.8})`,
-                          filter: `blur(${isAnnual ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={!isAnnual}
-                      >
-                        {plan.annualPrice}
-                      </span>
-                      <span
-                        className="absolute inset-0 flex items-center transition-all duration-500"
-                        style={{
-                          opacity: !isAnnual ? 1 : 0,
-                          transform: `scale(${!isAnnual ? 1 : 0.8})`,
-                          filter: `blur(${!isAnnual ? 0 : 4}px)`,
-                        }}
-                        aria-hidden={isAnnual}
-                      >
-                        {plan.monthlyPrice}
-                      </span>
-                    </div>
-                    <div
-                      className={`text-center text-sm font-medium leading-tight ${plan.popular ? "text-white/70" : "text-zinc-400"}`}
-                    >
-                      /month
-                    </div>
-                  </div>
-                  <div
-                    className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-white/70" : "text-zinc-400"}`}
-                  >
-                    {plan.description}
-                  </div>
-                </div>
-              </div>
-              <Button
-                className={`self-stretch px-5 py-2 rounded-[40px] flex justify-center items-center ${plan.buttonClass}`}
-              >
-                <div className="px-1.5 flex justify-center items-center gap-2">
-                  <span
-                    className={`text-center text-sm font-medium leading-tight ${plan.name === "Starter" ? "text-gray-800" : plan.name === "Growth" ? "text-white" : "text-zinc-950"}`}
-                  >
-                    {plan.buttonText}
-                  </span>
-                </div>
-              </Button>
-            </div>
-            <div className="self-stretch flex flex-col justify-start items-start gap-4">
-              <div
-                className={`self-stretch text-sm font-medium leading-tight ${plan.popular ? "text-white/70" : "text-muted-foreground"}`}
-              >
-                {plan.name === "Starter" ? "Everything you need to start:" : "Everything in Starter, plus:"}
-              </div>
-              <div className="self-stretch flex flex-col justify-start items-start gap-3">
-                {plan.features.map((feature) => (
-                  <div key={feature} className="self-stretch flex justify-start items-center gap-2">
-                    <div className="w-4 h-4 flex items-center justify-center">
-                      <Check
-                        className={`w-full h-full ${plan.popular ? "text-white" : "text-muted-foreground"}`}
-                        strokeWidth={2}
-                      />
-                    </div>
-                    <div
-                      className={`leading-tight font-normal text-sm text-left ${plan.popular ? "text-white" : "text-muted-foreground"}`}
-                    >
-                      {feature}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
-  )
+    )
 }
